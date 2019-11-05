@@ -1,0 +1,52 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+
+<dom-module id="main-component">
+  
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    
+    <script type="module" src="/src/workspace-app/workspace-app.js"></script>
+
+    <workspace-app></workspace-app>
+
+  </template>
+
+  <script>
+    Polymer.setPassiveTouchGestures(true)
+
+    class MainComponent extends Polymer.Element {
+      
+        static get is() {
+        return 'main-component'
+      }
+
+      static get properties() {
+        return {
+          nameMain: {
+            type: String,
+            value: 'main-component works!'
+          }
+        }
+      }
+
+      ready() {
+        super.ready()
+      }
+
+      _onLoad() {
+        
+      }
+
+      _showPage404() {
+        
+      }
+    }
+
+    window.customElements.define(MainComponent.is, MainComponent)
+  </script>
+</dom-module>

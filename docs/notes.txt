@@ -1,0 +1,41 @@
+Lit Element
+Es una simple clase base, para la creación de componentes web de forma
+rapida y ligera. Permite a dichos WC trabajen con cualquier framework web.
+
+lit-html => Manejar el shadow DOM.
+API => Manejar props.
+Actualiza de forma asincrona cada que una prop cambia.
+
+Importar componentes
+<script type="module" src="/path/to/my-element.js"></script>
+import './my-element.js'
+
+Encapsulamiento del DOM
++DOM Scope: document.querySelector no tiene acceso al shadow DOM.
++Style Scoping: Estilos encapsulados que solo modifican al componente.
++Composición.
+
+Comportamiento de Lit
++Cuando una propiedad cambia se ejecuta el render de el/los elementos
+que sufrieron cambios en sus propiedades.
++Diseñar componentes basados en el campio de sus propiedades.
+    *No cambiar el esta de los elementos.
+    *Solo depender de las propiedades de los elementos.
+    *Regresar la misma vista si el resultado de las props son las mismas.
+    *Evitar generar actualizaciones fuera del render.
+
+Shadow DOM vs NO Shadow DOM
+
+<my-element>
+  #shadow-root
+    <p>child 1</p>
+    <p>child 2</p>
+
+vs
+
+createRenderRoot() {
+    return this
+}
+
+
+
