@@ -3,6 +3,7 @@ import { styleSheetDomiciliaciones } from '../../assets/css/styles.js'
 
 
 import '../routing/index-routing.js'
+import '../session/index-session.js'
 
 class WorkspaceComp extends LitElement {
     
@@ -19,13 +20,15 @@ class WorkspaceComp extends LitElement {
     static get properties() {
         return {
             workspaceComp: { type: String },
-            menu: { type: Array }
+            menu: { type: Array },
+            userLogon: { type: Object }
         }
     }
 
     constructor() {
         super()
         this.workspaceComp = 'App de domiciliaciones'
+        this.userLogon = null//{ user: 'jose', mail: 'jmontoya'}
     }
 
     render() {
@@ -33,7 +36,10 @@ class WorkspaceComp extends LitElement {
             <div class="centerText">
                 <h1>${this.workspaceComp} works!</h1>
             </div>
-            <index-routing></index-routing>
+            ${ this.userLogon
+                ? html`<index-routing></index-routing>`
+                : html`<index-session></index-session>`
+            }
         `
     }
 

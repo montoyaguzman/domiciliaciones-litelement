@@ -1,5 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element'
 
+import { SERVER, PORT } from '../../config/config.js'
+
 import './sign-up.js'
 import './login-comp.js'
 
