@@ -1,24 +1,24 @@
 import { LitElement, html } from '@polymer/lit-element'
 
-class NameApp extends LitElement {
+class NotFound extends LitElement {
     
     static get properties() {
         return {
-            nameComponent: { type: String }
+            notFound: { type: String }
         }
     }
 
     constructor() {
         super()
-        this.nameComponent = 'nameComponent'
+        this.notFound = 'not-found'
     }
 
     render() {
         return html`
-            <h1>${this.nameComponent} works!</h1>
+            <h1>${this.notFound} works!</h1>
         `
     }
 
 }
 
-customElements.define('name-app', NameApp)
+customElements.define('not-found', NotFound)

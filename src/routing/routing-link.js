@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit-element'
 import { routerLinkMixin } from 'lit-element-router'
 
-export class Link extends routerLinkMixin(LitElement) {
+export class RoutingLink extends routerLinkMixin(LitElement) {
     
     static get properties() {
         return {
@@ -26,4 +26,4 @@ export class Link extends routerLinkMixin(LitElement) {
     }
 }
 
-customElements.define('link-app', Link)
+customElements.define('routing-link', RoutingLink)

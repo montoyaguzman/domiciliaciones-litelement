@@ -1,8 +1,10 @@
 import { LitElement, html, css } from '@polymer/lit-element'
 import { styleSheetDomiciliaciones } from '../../assets/css/styles.js'
-import '../routing/my-app.js'
 
-class Workspace extends LitElement {
+
+import '../routing/index-routing.js'
+
+class WorkspaceComp extends LitElement {
     
     static get styles() {
         return [
@@ -16,25 +18,25 @@ class Workspace extends LitElement {
 
     static get properties() {
         return {
-            workspaceComponent: { type: String },
+            workspaceComp: { type: String },
             menu: { type: Array }
         }
     }
 
     constructor() {
         super()
-        this.workspaceComponent = 'App de domiciliaciones'
+        this.workspaceComp = 'App de domiciliaciones'
     }
 
     render() {
         return html`
             <div class="centerText">
-                <h2>${this.workspaceComponent} works!</h2>
+                <h1>${this.workspaceComp} works!</h1>
             </div>
-            <my-app></my-app>
+            <index-routing></index-routing>
         `
     }
 
 }
 
-customElements.define('workspace-app', Workspace)
+customElements.define('workspace-comp', WorkspaceComp)
