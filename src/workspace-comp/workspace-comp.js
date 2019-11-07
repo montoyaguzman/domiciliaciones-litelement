@@ -1,7 +1,6 @@
 import { LitElement, html, css } from '@polymer/lit-element'
 import { styleSheetDomiciliaciones } from '../../assets/css/styles.js'
 
-
 import '../routing/index-routing.js'
 import '../session/index-session.js'
 
@@ -11,10 +10,11 @@ class WorkspaceComp extends LitElement {
         return [
             styleSheetDomiciliaciones,
             css`
-            :host { 
-                display: block;
-            }
-        `]
+                :host { 
+                    display: block;
+                }
+            ` 
+        ]
     }
 
     static get properties() {
@@ -33,6 +33,9 @@ class WorkspaceComp extends LitElement {
 
     render() {
         return html`
+            <!-- BULMA -->
+            <link rel="stylesheet" type="text/css" href="../node_modules/bulma/css/bulma.css">
+            
             <div class="centerText">
                 <h1>${this.workspaceComp} works!</h1>
             </div>
@@ -40,6 +43,8 @@ class WorkspaceComp extends LitElement {
                 ? html`<index-routing></index-routing>`
                 : html`<index-session></index-session>`
             }
+            <button class="button">Bulma Button</button>
+            <button class="button is-link">Link</button>
         `
     }
 
