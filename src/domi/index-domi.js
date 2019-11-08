@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element'
+import { LitElement, html } from 'lit-element'
 
 import './domi-form.js'
 import './domi-table.js'

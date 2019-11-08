@@ -10,7 +10,7 @@ mkdir my-project
 npm init
 
 2. Agregar a las dependencias
-"@polymer/lit-element": "^0.7.1",
+"/lit-element": "^0.7.1",
 "@webcomponents/webcomponentsjs": "^2.3.0"
 
 3. Instalar

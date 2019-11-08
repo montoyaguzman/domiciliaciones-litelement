@@ -1,4 +1,4 @@
-import { LitElement, html, css } from '@polymer/lit-element'
+import { LitElement, html, css } from 'lit-element'
 
 class HomeComp extends LitElement {
     
