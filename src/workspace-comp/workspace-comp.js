@@ -21,7 +21,8 @@ class WorkspaceComp extends UtilComp {
         return {
             workspaceComp: { type: String },
             menu: { type: Array },
-            userLogon: { type: Object }
+            userLogon: { type: Object },
+            sessionPage: { type: String }
         }
     }
 
@@ -29,24 +30,43 @@ class WorkspaceComp extends UtilComp {
         super()
         this.workspaceComp = 'App de domiciliaciones'
         this.userLogon = null//{ user: 'jose', mail: 'jmontoya'}
+        this.sessionPage = 'login'
     }
 
     render() {
 
         return html`
         
-        
             <div class="centerText">
                 <h1>${this.workspaceComp} works!</h1>
             </div>
+            
+            <div id='login' 
+                @click=${this.handleIndexSession}>
+                Login
+            </div>
+            <div id='signup' 
+                @click=${this.handleIndexSession}>
+                Registro
+            </div>
+
             ${ this.userLogon
                 ? html`<index-routing></index-routing>`
-                : html`<index-session></index-session>`
+                : html`<index-session .sessionPage=${this.sessionPage}></index-session>`
             }
-
-            
+        
 
         `
+    }
+
+    updated(changedProperties) {
+        changedProperties.forEach((oldValue, propName) => {
+            // console.log(`papa ${propName} changed. oldValue: ${oldValue}`)
+        })
+    }
+
+    handleIndexSession(e) {
+        this.sessionPage = e.target.id
     }
 
 }

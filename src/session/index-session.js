@@ -21,25 +21,33 @@ class Sesion extends UtilComp {
 
     static get properties() {
         return {
-            sesion: { type: String }
+            // sesion: { type: String },
+            sessionPage: { type: String }
         }
     }
 
     constructor() {
         super()
-        this.sesion = 'index-session'
+        // this.sesion = 'index-session'
+        this.sessionPage = 'login'
     }
 
     render() {
         return html`
-            <h2>${this.sesion} works!</h2>
-
-            <sign-up></sign-up>
-            <login-comp></login-comp>
-
-            <button class="button is-primary">Primary3</button>
+            <!-- <h2> ${this.sesion} </h2> -->
+            ${this.sessionPage === 'login'
+                ? html`<login-comp></login-comp>`
+                : html`<sign-up></sign-up>`
+            }
+            
 
         `
+    }
+
+    updated(changedProperties) {
+        changedProperties.forEach((oldValue, propName) => {
+            // console.log(`hijo ${propName} changed. oldValue: ${oldValue}`)
+        });
     }
 
 }
