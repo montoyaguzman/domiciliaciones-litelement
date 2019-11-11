@@ -1,6 +1,5 @@
 import { LitElement, html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp.js'
-import { SERVER, PORT } from '../../config/config.js'
 
 import './sign-up.js'
 import './login-comp.js'
@@ -25,6 +24,7 @@ class Sesion extends UtilComp {
             sessionPage: { type: String }
         }
     }
+      
 
     constructor() {
         super()

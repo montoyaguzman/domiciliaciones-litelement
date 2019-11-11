@@ -29,14 +29,20 @@ class WorkspaceComp extends UtilComp {
     constructor() {
         super()
         this.workspaceComp = 'App de domiciliaciones'
-        this.userLogon = null//{ user: 'jose', mail: 'jmontoya'}
+        this.userLogon = null
         this.sessionPage = 'login'
+
+        document.addEventListener('login-updated', (e) => {
+            let login = e.detail.login || ''
+            if (login) {
+                this.userLogon = { user: e.detail.user }
+            }
+        })
     }
 
     render() {
 
         return html`
-        
             <div class="centerText">
                 <h1>${this.workspaceComp} works!</h1>
             </div>
