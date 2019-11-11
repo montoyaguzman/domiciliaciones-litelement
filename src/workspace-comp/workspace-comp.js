@@ -32,12 +32,18 @@ class WorkspaceComp extends UtilComp {
         this.userLogon = null
         this.sessionPage = 'login'
 
-        document.addEventListener('login-updated', (e) => {
+        document.addEventListener('log-in', (e) => {
             let login = e.detail.login || ''
             if (login) {
                 this.userLogon = { user: e.detail.user }
             }
         })
+        
+        document.addEventListener('log-out', (e) => {
+            console.log('saliendo')
+            this.userLogon = null
+        })
+        
     }
 
     render() {
@@ -46,19 +52,20 @@ class WorkspaceComp extends UtilComp {
             <div class="centerText">
                 <h1>${this.workspaceComp} works!</h1>
             </div>
-            
-            <div id='login' 
-                @click=${this.handleIndexSession}>
-                Login
-            </div>
-            <div id='signup' 
-                @click=${this.handleIndexSession}>
-                Registro
-            </div>
 
             ${ this.userLogon
                 ? html`<index-routing></index-routing>`
-                : html`<index-session .sessionPage=${this.sessionPage}></index-session>`
+                : html`
+                    <div id='login' 
+                        @click=${this.handleIndexSession}>
+                        Login
+                    </div>
+                    <div id='signup' 
+                        @click=${this.handleIndexSession}>
+                        Registro
+                    </div>
+                    <index-session .sessionPage=${this.sessionPage}></index-session>
+                `
             }
         
 

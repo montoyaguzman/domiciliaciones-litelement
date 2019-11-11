@@ -56,7 +56,7 @@ class LoginComp extends UtilComp {
         services.execPost('login', null, user).then((response) => {
             console.log('response: ', response)
             if(response && response.code === 200) {
-                let event = new CustomEvent('login-updated', {
+                let event = new CustomEvent('log-in', {
                     detail: response,
                     bubbles: true,
                     composed: true 
