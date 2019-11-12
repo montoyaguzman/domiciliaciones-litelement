@@ -23,7 +23,6 @@ class Routing extends routerMixin(LitElement) {
     static get routes() {
         return [
             { name: 'home', pattern: '/' }, 
-            { name: 'session', pattern: 'session' },
             { name: 'user', pattern: 'user' }, 
             { name: 'domi', pattern: 'domi' },
             { name: 'info', pattern: 'info' },
@@ -47,15 +46,13 @@ class Routing extends routerMixin(LitElement) {
     render() {
         return html`
           <routing-link href='/'>Home |</routing-link>
-          <routing-link href='session'>Session |</routing-link>
           <routing-link href='user'>Users |</routing-link>
           <routing-link href='domi'>Domiciliaciones |</routing-link>
           <routing-link href='info'>Info |</routing-link>
-          <routing-link href='not-found'>Not found |</routing-link>
     
           <routing-outlet current-route=${this.route}>
               <home-comp route='home'>Home</home-comp>
-              <index-session route='session'>Session</index-session>
+              <index-session route='session'>Session |</index-session>
               <index-user route='user'>Usuarios</index-user>
               <index-domi route='domi'>Domiciliaciones</index-domi>
               <info-comp route='info'>Info</info-comp>

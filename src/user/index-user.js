@@ -7,18 +7,18 @@ class User extends LitElement {
     
     static get properties() {
         return {
-            user: { type: String }
+            // user: { type: String }
         }
     }
 
     constructor() {
         super()
-        this.user = 'index-user'
+        // this.user = 'index-user'
     }
 
     render() {
         return html`
-            <h1>${this.user} works!</h1>
+            <!-- <h1>${this.user} works!</h1> -->
             <user-form></user-form>
             <user-table></user-table>
         `

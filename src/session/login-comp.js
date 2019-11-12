@@ -7,7 +7,7 @@ class LoginComp extends UtilComp {
     static get properties() {
         return {
             // loginComp: { type: String }
-            user: { type: String },
+            email: { type: String },
             password: { type: String, reflect: true }
         }
     }
@@ -15,7 +15,7 @@ class LoginComp extends UtilComp {
     constructor() {
         super()
         // this.loginComp = 'login-comp'
-        this.user = ''
+        this.email = ''
         this.password = ''
     }
 
@@ -31,10 +31,10 @@ class LoginComp extends UtilComp {
                 <h3>Login</h3>
                 <input 
                     type="text" 
-                    id="user" 
-                    name="user" 
-                    .value=${this.user}
-                    @change=${e => { this.user = e.currentTarget.value } }
+                    id="email" 
+                    name="email" 
+                    .value=${this.email}
+                    @change=${e => { this.email = e.currentTarget.value } }
                     placeholder="correo">
                 <input 
                     type="password" 
@@ -43,14 +43,14 @@ class LoginComp extends UtilComp {
                     .value=${this.password} 
                     @change=${e => { this.password = e.currentTarget.value } }
                     placeholder="contraseña">
-                <button @click=${this.login}>login</button>
+                <button @click=${this.login}>Ingresar</button>
             </div>
         `
     }
 
     login() {
         let user = {
-            user: this.user,
+            email: this.email,
             password: this.password
         }
         services.execPost('login', null, user).then((response) => {
