@@ -78,6 +78,14 @@ class SignUp extends LitElement {
     }
 
     cleanForm() {
+        this.shadowRoot.getElementById('name').value = ''
+        this.shadowRoot.getElementById('app').value = ''
+        this.shadowRoot.getElementById('apm').value = ''
+        this.shadowRoot.getElementById('cellphone').value = ''
+        this.shadowRoot.getElementById('password').value = ''
+    }
+
+    cleanUserObj() {
         this.user = {
             name: '',
             app: '',
@@ -93,8 +101,8 @@ class SignUp extends LitElement {
         services.execPost('signup', null, this.user).then((response) => {
             if(response && response.code === 200) {
                 alert('registro exitoso!')
+                this.cleanUserObj()
                 this.cleanForm()
-                console.log('this.user =>', this.user)
             } else {
                 alert('error en registro')
             }
