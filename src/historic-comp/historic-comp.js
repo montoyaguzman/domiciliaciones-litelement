@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit-element'
+import { UtilComp } from '../util/util-comp'
 
-class HistoricComp extends LitElement {
+class HistoricComp extends UtilComp {
     
     static get properties() {
         return {
@@ -25,34 +26,38 @@ class HistoricComp extends LitElement {
                 <span>aqui van los filtros....</span>
             </div>
             <div class="card">
-                <h3>Historico de pagos</h3>
-                <table style="width:100%;" border="1">
-                    <tr>
-                        <th>Alias del servicio</th>
-                        <th>Descripcion</th>
-                        <th>Numero de tarjeta</th>
-                        <th>Referencia</th>
-                        <th>Fecha de pago</th>
-                        <th>Fecha de cargo</th>
-                        <th>Cantidad</th>
-                        <th>Periodicidad</th>
-                        <th>Estatus de periodicidad</th>
-                        <th>Estatus de domiciliacion</th>
-                    </tr>
-                    ${this.payments.map((payment) => html`
+                <h3>Histórico de pagos</h3>
+                <table>
+                    <thead>
                         <tr>
-                            <th>${payment.alias}</th>
-                            <th>${payment.Descripcion}</th>
-                            <th>${payment.cardNumber}</th>
-                            <th>${payment.reference}</th>
-                            <th>${payment.paymentDate}</th>
-                            <th>${payment.chargeDate}</th>
-                            <th>${payment.amount}</th>
-                            <th>${payment.Periodicidad}</th>
-                            <th>${payment.periodicityStatus}</th>
-                            <th>${payment.status}</th>
+                            <th>Alias del servicio</th>
+                            <th>Descripcion</th>
+                            <th>Numero de tarjeta</th>
+                            <th>Referencia</th>
+                            <th>Fecha de pago</th>
+                            <th>Fecha de cargo</th>
+                            <th>Cantidad</th>
+                            <th>Periodicidad</th>
+                            <th>Estatus de periodicidad</th>
+                            <th>Estatus de domiciliacion</th>
                         </tr>
-                    `)}
+                    </thead>
+                    <tbody>
+                        ${this.payments.map((payment) => html`
+                            <tr>
+                                <th>${payment.alias}</th>
+                                <th>${payment.description}</th>
+                                <th>${payment.cardNumber}</th>
+                                <th>${payment.reference}</th>
+                                <th>${payment.paymentDate}</th>
+                                <th>${payment.chargeDate}</th>
+                                <th>${payment.amount}</th>
+                                <th>${payment.periodicity}</th>
+                                <th>${payment.periodicityStatus}</th>
+                                <th>${payment.status}</th>
+                            </tr>
+                        `)}
+                    <tbody>
                 </table>
             </div>
 

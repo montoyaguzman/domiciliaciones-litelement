@@ -1,8 +1,5 @@
 import { LitElement, html } from 'lit-element'
 
-import './user-form.js'
-import './user-table.js'
-
 class User extends LitElement {
     
     static get properties() {
@@ -19,10 +16,14 @@ class User extends LitElement {
     render() {
         return html`
             <!-- <h1>${this.user} works!</h1> -->
-            <user-form></user-form>
-            <!--
-            <user-table></user-table>
-            -->
+            <div class="card">
+                Datos del usuario
+            </div>
+            <div class="card">
+                Catalogo de domiciliaciones, cards
+            </div>
+            <!-- <user-form></user-form> -->
+            <!-- <user-table></user-table> -->
         `
     }
 

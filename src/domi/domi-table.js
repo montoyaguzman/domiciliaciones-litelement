@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit-element'
+import { UtilComp } from '../util/util-comp'
 
-class DomiTable extends LitElement {
+class DomiTable extends UtilComp {
     
     static get properties() {
         return {
@@ -27,28 +28,44 @@ class DomiTable extends LitElement {
             </div>
             <div class="card">
                 <h3>Consulta de domiciliaciones</h3>
-                <table style="width:100%;" border="1">
-                    <tr>
-                        <th>Alias</th>
-                        <th>Descripcion</th>
-                        <th>Referencia</th>
-                        <th>Dia de pago</th>
-                        <th>Periodicidad (estatus)</th>
-                        <th>Cantidad</th>
-                        <th>Cuenta de cobro</th>
-                    </tr>
-
-                    ${this.domis.map((domi) => html`
+                <table>
+                    <thead>
                         <tr>
-                            <th>${domi.serviceAlias}</th>
-                            <th>${domi.description}</th>
-                            <th>${domi.reference}</th>
-                            <th>${domi.paymentDay}</th>
-                            <th>${`${domi.periodicity} (${domi.IsPeriodic})`}</th>
-                            <th>${domi.amount}</th>
-                            <th>${domi.account}</th>
+                            <th>Alias</th>
+                            <th>Descripcion</th>
+                            <th>Referencia</th>
+                            <th>Dia de pago</th>
+                            <th>Periodicidad (estatus)</th>
+                            <th>Cantidad</th>
+                            <th>Cuenta de cobro</th>
+                            <th>Acciones</th>
                         </tr>
-                    `)}
+                    </thead>
+                    <tbody>
+                        ${this.domis.map((domi) => html`
+                            <tr>
+                                <th>${domi.serviceAlias}</th>
+                                <th>${domi.description}</th>
+                                <th>${domi.reference}</th>
+                                <th>${domi.paymentDay}</th>
+                                <th>${`${domi.periodicity} (${domi.IsPeriodic})`}</th>
+                                <th>${domi.amount}</th>
+                                <th>${domi.account}</th>
+                                <th>
+                                    <img 
+                                        width="30px" 
+                                        height="30px" 
+                                        alt="editar" 
+                                        src="../assets/img/edit.png">
+                                    <img 
+                                        width="30px" 
+                                        height="30px" 
+                                        alt="borrar"
+                                        src="../assets/img/delete.png">
+                                </th>
+                            </tr>
+                        `)}
+                    </tbody>
                 </table>
             </div>
         `

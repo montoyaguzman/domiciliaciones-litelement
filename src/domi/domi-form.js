@@ -17,7 +17,7 @@ class DomiForm extends LitElement {
             description: '',
             reference: '',
             paymentDay: '',
-            IsPeriodic: false, 
+            IsPeriodic: '', 
             periodicity: '',
             amount:'',
             card:''
@@ -111,12 +111,12 @@ class DomiForm extends LitElement {
     }
 
     cleanDomiObj() {
-        this.user = {
+        this.domi = {
             serviceAlias: '',
             description: '',
             reference: '',
             paymentDay: '',
-            IsPeriodic: false, 
+            IsPeriodic: '', 
             periodicity: '',
             amount: '',
             card: ''

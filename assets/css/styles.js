@@ -1,13 +1,6 @@
 import { css } from 'lit-element'
 
 export default css`
-  .centerText {
-    text-align: center;
-    color: blue;
-  }
-`
-/*
-export default css`
   
   *,
   *:after,
@@ -608,4 +601,3 @@ export default css`
   }
 
 `
-*/

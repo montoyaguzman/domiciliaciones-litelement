@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit-element'
+import { UtilComp } from '../util/util-comp'
 
-class HomeComp extends LitElement {
+class HomeComp extends UtilComp {
     
     static get styles() {
         return [
@@ -26,6 +27,7 @@ class HomeComp extends LitElement {
     render() {
         return html`
             <h1>${this.homeComp} works!</h1>
+            
         `
     }
 
