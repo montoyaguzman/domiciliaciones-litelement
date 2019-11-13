@@ -13,12 +13,12 @@ class Domi extends LitElement {
 
     constructor() {
         super()
-        this.domi = 'index-domi'
+        // this.domi = 'index-domi'
     }
 
     render() {
         return html`
-            <h2>${this.domi} works!</h2>
+            <!-- <h2>${this.domi} works!</h2> -->
             <domi-form></domi-form>
             <domi-table></domi-table>
         `

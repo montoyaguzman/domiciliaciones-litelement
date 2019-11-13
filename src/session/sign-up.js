@@ -4,14 +4,14 @@ class SignUp extends LitElement {
     
     static get properties() {
         return {
-            signUp: { type: String },
+            // signUp: { type: String },
             user: { type: Object }
         }
     }
 
     constructor() {
         super()
-        this.signUp = 'sign-up',
+        // this.signUp = 'sign-up',
         this.user = {
             name: '',
             app: '',
