@@ -8,7 +8,7 @@ import '../home-comp/home-comp.js'
 import '../session/index-session.js'
 import '../user/index-user.js'
 import '../domi/index-domi.js'
-import '../info-comp/info-comp.js'
+import '../historic-comp/historic-comp.js'
 import '../not-found/not-found.js'
  
 class Routing extends routerMixin(LitElement) {
@@ -25,7 +25,7 @@ class Routing extends routerMixin(LitElement) {
             { name: 'home', pattern: '/' }, 
             { name: 'user', pattern: 'user' }, 
             { name: 'domi', pattern: 'domi' },
-            { name: 'info', pattern: 'info' },
+            { name: 'historic', pattern: 'historic' },
             { name: 'not-found', pattern: '*' }
         ];
     }
@@ -39,7 +39,7 @@ class Routing extends routerMixin(LitElement) {
     onRoute(route, params, query, data) {
         this.route = route
         this.params = params
-        console.log(`route: ${route} | params: ${params}`)
+        // console.log(`route: ${route} | params: ${params}`)
         // console.log(`query: ${query} | data: ${data}`)
     }
 
@@ -48,14 +48,14 @@ class Routing extends routerMixin(LitElement) {
           <routing-link href='/'>Home |</routing-link>
           <routing-link href='user'>Users |</routing-link>
           <routing-link href='domi'>Domiciliaciones |</routing-link>
-          <routing-link href='info'>Info |</routing-link>
+          <routing-link href='historic'>Historico de Pagos |</routing-link>
     
           <routing-outlet current-route=${this.route}>
               <home-comp route='home'>Home</home-comp>
               <index-session route='session'>Session |</index-session>
               <index-user route='user'>Usuarios</index-user>
               <index-domi route='domi'>Domiciliaciones</index-domi>
-              <info-comp route='info'>Info</info-comp>
+              <historic-comp route='historic'>History</historic-comp>
               <not-found route='not-found'>Not Found</not-found>
           </routing-outlet>
         `

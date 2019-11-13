@@ -8,11 +8,6 @@ class HomeComp extends LitElement {
                 :host { 
                     display: block;
                 }
-                .logout {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: flex-end;
-                }
             `
         ]
     }
@@ -30,20 +25,8 @@ class HomeComp extends LitElement {
 
     render() {
         return html`
-            <div class="logout">
-                <a @click=${this.closeSession}>Close session</a>
-            </div>
             <h1>${this.homeComp} works!</h1>
         `
-    }
-
-    closeSession() {
-        let event = new CustomEvent('log-out', {
-            detail: 'session closed!',
-            bubbles: true,
-            composed: true 
-        })
-        this.dispatchEvent(event)
     }
 
 }

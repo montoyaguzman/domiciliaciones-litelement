@@ -20,7 +20,9 @@ class User extends LitElement {
         return html`
             <!-- <h1>${this.user} works!</h1> -->
             <user-form></user-form>
+            <!--
             <user-table></user-table>
+            -->
         `
     }
 

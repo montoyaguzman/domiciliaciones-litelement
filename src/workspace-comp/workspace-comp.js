@@ -12,6 +12,12 @@ class WorkspaceComp extends UtilComp {
                 :host { 
                     display: block;
                 }
+                .logout {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    color: red;
+                }
             `,
             super.styles
         ]
@@ -29,18 +35,19 @@ class WorkspaceComp extends UtilComp {
     constructor() {
         super()
         this.workspaceComp = 'App de domiciliaciones'
-        this.userLogon = null
+        this.userLogon = localStorage.getItem('userName') || null
         this.sessionPage = 'login'
 
         document.addEventListener('log-in', (e) => {
             let login = e.detail.login || ''
             if (login) {
-                this.userLogon = { user: e.detail.user }
+                localStorage.setItem('userName', e.detail.email)
+                this.userLogon = localStorage.getItem('userName')
             }
         })
         
         document.addEventListener('log-out', (e) => {
-            console.log('saliendo')
+            localStorage.clear()
             this.userLogon = null
         })
         
@@ -54,7 +61,12 @@ class WorkspaceComp extends UtilComp {
             </div>
 
             ${ this.userLogon
-                ? html`<index-routing></index-routing>`
+                ? html`
+                    <div class="logout">
+                        <a @click=${this.closeSession}>Close session</a>
+                    </div>
+                    <index-routing></index-routing>
+                  `
                 : html`
                     <div id='login' 
                         @click=${this.handleIndexSession}>
@@ -76,6 +88,15 @@ class WorkspaceComp extends UtilComp {
         changedProperties.forEach((oldValue, propName) => {
             // console.log(`papa ${propName} changed. oldValue: ${oldValue}`)
         })
+    }
+
+    closeSession() {
+        let event = new CustomEvent('log-out', {
+            detail: 'session closed!',
+            bubbles: true,
+            composed: true 
+        })
+        this.dispatchEvent(event)
     }
 
     handleIndexSession(e) {

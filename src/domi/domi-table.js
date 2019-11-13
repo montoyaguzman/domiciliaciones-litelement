@@ -23,7 +23,10 @@ class DomiTable extends LitElement {
         return html`
             <!-- <h3>${this.domiTable} works!</h3> -->
             <div class="card">
-                <h3>Consulta de clientes</h3>
+                <span>aqui van los filtros....</span>
+            </div>
+            <div class="card">
+                <h3>Consulta de domiciliaciones</h3>
                 <table style="width:100%;" border="1">
                     <tr>
                         <th>Alias</th>
