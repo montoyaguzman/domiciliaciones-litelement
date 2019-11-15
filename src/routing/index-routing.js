@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { routerMixin  } from 'lit-element-router';
 
 import './routing-link.js'
@@ -10,8 +10,18 @@ import '../user/index-user.js'
 import '../domi/index-domi.js'
 import '../historic-comp/historic-comp.js'
 import '../not-found/not-found.js'
+import { UtilComp } from '../util/util-comp.js';
  
-class Routing extends routerMixin(LitElement) {
+class Routing extends routerMixin(UtilComp) {
+
+    static get styles() {
+        return [
+            super.styles,
+            css`
+                
+            `
+        ]
+    }
     
     static get properties() {
         return {
@@ -45,11 +55,24 @@ class Routing extends routerMixin(LitElement) {
 
     render() {
         return html`
-          <routing-link href='/'>Home |</routing-link>
-          <routing-link href='user'>Users |</routing-link>
-          <routing-link href='domi'>Domiciliaciones |</routing-link>
-          <routing-link href='historic'>Historico de Pagos |</routing-link>
-    
+          <div class="menu">
+            <div></div>
+            <div class="options">
+                <div>
+                    <routing-link href='/'>Home</routing-link>
+                </div> 
+                <div>
+                    <routing-link href='user'>Users</routing-link>
+                </div>
+                <div>
+                    <routing-link href='domi'>Domiciliaciones</routing-link>
+                </div>
+                <div>
+                    <routing-link href='historic'>Historico</routing-link>
+                </div>                
+            </div>
+          </div>
+
           <routing-outlet current-route=${this.route}>
               <home-comp route='home'>Home</home-comp>
               <index-session route='session'>Session |</index-session>

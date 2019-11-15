@@ -83,5 +83,19 @@ export default css`
     display: block;
     padding: 10px 0;
   }
+
+  .menu {
+    display: grid;
+    justify-items: end;
+    grid-template-columns: 70% 30%;
+
+  }
+
+  .options {
+    display: grid;
+    justify-items: start;
+    grid-template-columns: 50% 50%;
+    
+  }
   
 `

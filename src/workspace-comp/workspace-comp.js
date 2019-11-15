@@ -124,7 +124,7 @@ class WorkspaceComp extends UtilComp {
                             alt="menu" 
                             src="../assets/img/menu.png"
                             @click=${this.showMenu}
-                        >
+                        >                        
                         <img 
                             width="30px" 
                             height="30px" 
