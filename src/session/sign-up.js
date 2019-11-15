@@ -1,6 +1,17 @@
-import { LitElement, html } from 'lit-element'
+import { html, css } from 'lit-element'
+import { UtilComp } from '../util/util-comp.js'
 import * as services from '../util/services.js'
-class SignUp extends LitElement {
+
+class SignUp extends UtilComp {
+
+    static get styles() {
+        return [
+            super.styles,
+            css`
+                
+            `
+        ]
+    }
     
     static get properties() {
         return {
@@ -24,55 +35,73 @@ class SignUp extends LitElement {
 
     render() {
         return html`
-            <div class="card">
+            <div class="card inMiddle">
                 <h3>Registro</h3>
-                <input 
-                    type="text" 
-                    id="name" name="name" 
-                    .value=${this.user.name} 
-                    @change=${e => { this.user.name = e.currentTarget.value } }
-                    placeholder="name"
-                >
-                <input 
-                    type="text" 
-                    id="app" 
-                    name="app" 
-                    .value=${this.user.app} 
-                    @change=${e => { this.user.app = e.currentTarget.value } }
-                    placeholder="app">
-                <input 
-                    type="text" 
-                    id="apm" 
-                    name="apm" 
-                    .value=${this.user.apm} 
-                    @change=${e => { this.user.apm = e.currentTarget.value } }
-                    placeholder="apm"
-                >
-                <input 
-                    type="text" 
-                    id="cellphone" 
-                    name="cellphone" 
-                    .value=${this.user.cellphone} 
-                    @change=${e => { this.user.cellphone = e.currentTarget.value } }
-                    placeholder="cellphone"
-                >
-                <input 
-                    type="text" 
-                    id="email" 
-                    name="email" 
-                    .value=${this.user.email} 
-                    @change=${e => { this.user.email = e.currentTarget.value } }
-                    placeholder="correo"
-                >
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    .value=${this.user.password} 
-                    @change=${e => { this.user.password = e.currentTarget.value } }
-                    placeholder="contraseña"
-                >
-                <button @click=${this.regista}>Registar</button>
+                <div class="row">
+                    <input 
+                        type="text" 
+                        id="name" name="name" 
+                        .value=${this.user.name} 
+                        @change=${e => { this.user.name = e.currentTarget.value } }
+                        placeholder="name"
+                    >
+                </div>
+                <div class="row">
+                    <input 
+                        type="text" 
+                        id="app" 
+                        name="app" 
+                        .value=${this.user.app} 
+                        @change=${e => { this.user.app = e.currentTarget.value } }
+                        placeholder="app">
+                </div>
+                <div class="row">
+                    <input 
+                        type="text" 
+                        id="apm" 
+                        name="apm" 
+                        .value=${this.user.apm} 
+                        @change=${e => { this.user.apm = e.currentTarget.value } }
+                        placeholder="apm"
+                    >
+                </div>
+                <div class="row">
+                    <input 
+                        type="text" 
+                        id="cellphone" 
+                        name="cellphone" 
+                        .value=${this.user.cellphone} 
+                        @change=${e => { this.user.cellphone = e.currentTarget.value } }
+                        placeholder="cellphone"
+                    >
+                </div>
+                <div class="row">
+                    <input 
+                        type="text" 
+                        id="email" 
+                        name="email" 
+                        .value=${this.user.email} 
+                        @change=${e => { this.user.email = e.currentTarget.value } }
+                        placeholder="correo"
+                    >
+                </div>
+                <div class="row">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        .value=${this.user.password} 
+                        @change=${e => { this.user.password = e.currentTarget.value } }
+                        placeholder="contraseña"
+                    >
+                </div>
+                <div class="row">
+                    <button 
+                        class="button-success pure-button"
+                        @click=${this.registra}>
+                            Registrar
+                    </button>
+                </div>
             </div>
         `
     }
@@ -96,7 +125,7 @@ class SignUp extends LitElement {
         }
     }
 
-    regista() {
+    registra() {
         
         services.execPost('signup', null, this.user).then((response) => {
             if(response && response.code === 200) {

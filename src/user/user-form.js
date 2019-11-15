@@ -1,6 +1,15 @@
-import { LitElement, html } from 'lit-element'
+import { html, css } from 'lit-element'
 
-class UserForm extends LitElement {
+class UserForm extends UtilComp {
+
+    static get styles() {
+        return [
+            super.styles,
+            css`
+                
+            `
+        ]
+    }
     
     static get properties() {
         return {
@@ -26,7 +35,7 @@ class UserForm extends LitElement {
     render() {
         return html`
             <!-- <h3>${this.userForm} works!</h3> -->
-            <div class="card">
+            <div class="card inComplete">
                 <h3>Registro de clientes</h3>
                 <input 
                     type="text" 

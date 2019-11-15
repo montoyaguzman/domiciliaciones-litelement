@@ -1,14 +1,13 @@
-import { LitElement, html, css } from 'lit-element'
+import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp'
 
 class HomeComp extends UtilComp {
     
     static get styles() {
         return [
+            super.styles,
             css`
-                :host { 
-                    display: block;
-                }
+                
             `
         ]
     }

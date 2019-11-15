@@ -1,7 +1,17 @@
-import { LitElement, html } from 'lit-element'
+import { html, css } from 'lit-element'
+import { UtilComp } from '../util/util-comp'
 
-class NotFound extends LitElement {
+class NotFound extends UtilComp {
     
+    static get styles() {
+        return [
+            super.styles,
+            css`
+                
+            `
+        ]
+    }
+
     static get properties() {
         return {
             notFound: { type: String }

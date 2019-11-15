@@ -1,6 +1,15 @@
-import { LitElement, html } from 'lit-element'
+import { html, css } from 'lit-element'
 
-class UserTable extends LitElement {
+class UserTable extends UtilComp {
+
+    static get styles() {
+        return [
+            super.styles,
+            css`
+                
+            `
+        ]
+    }
     
     static get properties() {
         return {
@@ -22,10 +31,10 @@ class UserTable extends LitElement {
     render() {
         return html`
             <!--<h3>${this.userTable} works!</h3>-->
-            <div class="card">
+            <div class="card inComplete">
                 <span>aqui van los filtros....</span>
             </div>
-            <div class="card">
+            <div class="card inComplete">
                 <h3>Consulta de clientes</h3>
                 <table style="width:100%;" border="1">
                     <tr>

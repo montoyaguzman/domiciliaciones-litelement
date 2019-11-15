@@ -1,7 +1,16 @@
-import { LitElement, html } from 'lit-element'
+import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp'
 
 class HistoricComp extends UtilComp {
+
+    static get styles() {
+        return [
+            super.styles,
+            css`
+                
+            `
+        ]
+    }
     
     static get properties() {
         return {
@@ -22,10 +31,10 @@ class HistoricComp extends UtilComp {
     render() {
         return html`
             <!-- <h1>${this.historicComp} works!</h1> -->
-            <div class="card">
+            <div class="card inComplete">
                 <span>aqui van los filtros....</span>
             </div>
-            <div class="card">
+            <div class="card inComplete">
                 <h3>Histórico de pagos</h3>
                 <table>
                     <thead>

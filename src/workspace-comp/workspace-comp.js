@@ -1,5 +1,6 @@
-import { html, css, LitElement } from 'lit-element'
+import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp.js'
+import { classMap } from 'lit-html/directives/class-map'
 
 import '../routing/index-routing.js'
 import '../session/index-session.js'
@@ -8,18 +9,67 @@ class WorkspaceComp extends UtilComp {
     
     static get styles() {
         return [
+            super.styles,
             css`
                 :host { 
                     display: block;
+              
                 }
+                
+                .banner {
+                    display:  grid;
+                    grid-template-columns: 40% repeat(2, 20%) 20%;
+                    padding: 30px;
+                    background-color: #072146;
+                    color: #ffffff;
+                }
+
                 .logout {
+                    text-align: end;
+                }
+
+                .slidesContainer {
+                    display: grid;
+                    grid-template-columns: 40% 20% 40%;
+                    matgin-top: 15px;
+                }
+
+                .navDiv {
+                    width: 100%;
+                    color: #ffffff;
+                }
+
+                .navStyle {
                     display: flex;
                     flex-direction: row;
-                    justify-content: flex-end;
-                    color: red;
+                    justify-content: center;
+                    background-color: #1d73b2;
+                    border-radius: 15px;
+                    margin-top: 10px;
                 }
-            `,
-            super.styles
+
+                .listStyle {
+                    display: flex;
+                    flex-direction: row;
+                    padding: 0;
+                    list-style: none;
+                }
+
+                img {
+                    padding: 0 10px;
+                    cursor: pointer;
+                }
+
+                a {
+                    margin: 5px;
+                    padding: 12px;
+                }
+
+                .activeClass {
+                    border-bottom: 2px solid #fff;
+                }
+
+            `
         ]
     }
 
@@ -28,7 +78,8 @@ class WorkspaceComp extends UtilComp {
             workspaceComp: { type: String },
             menu: { type: Array },
             userLogon: { type: Object },
-            sessionPage: { type: String }
+            sessionPage: { type: String },
+            activeClass: { type: Object },
         }
     }
 
@@ -37,6 +88,8 @@ class WorkspaceComp extends UtilComp {
         this.workspaceComp = 'App de domiciliaciones'
         this.userLogon = localStorage.getItem('userName') || null
         this.sessionPage = 'login'
+        this.activeClassSignup = { activeClass: false },
+        this.activeClassLogin = { activeClass: true },
 
         document.addEventListener('log-in', (e) => {
             let login = e.detail.login || ''
@@ -56,25 +109,63 @@ class WorkspaceComp extends UtilComp {
     render() {
 
         return html`
-            <div class="centerText">
-                <h1>${this.workspaceComp} works!</h1>
+            <div class="banner">
+                <div class="titleApp">
+                    <h1>${this.workspaceComp}</h1>
+                </div>
+                <div></div>
+                <div></div>
+                ${ this.userLogon ? 
+                    html`
+                    <div class="logout">
+                        <img 
+                            width="30px" 
+                            height="30px" 
+                            alt="menu" 
+                            src="../assets/img/menu.png"
+                            @click=${this.showMenu}
+                        >
+                        <img 
+                            width="30px" 
+                            height="30px" 
+                            alt="salir" 
+                            src="../assets/img/go-out.png"
+                            @click=${this.closeSession}
+                        >
+                    </div>`
+                    : html`<div></div>`
+                }
             </div>
-
             ${ this.userLogon
                 ? html`
-                    <div class="logout">
-                        <a @click=${this.closeSession}>Close session</a>
-                    </div>
                     <index-routing></index-routing>
                   `
                 : html`
-                    <div id='login' 
-                        @click=${this.handleIndexSession}>
-                        Login
-                    </div>
-                    <div id='signup' 
-                        @click=${this.handleIndexSession}>
-                        Registro
+                    <div class="slidesContainer">
+                        <div></div>
+                        <div class="navDiv">
+                        
+                        <nav class="navStyle">
+                            <ul class="listStyle">
+                                <li>
+                                    <a id='login'
+                                        class=${classMap(this.activeClassLogin)}
+                                        @click=${this.handleIndexSession}>
+                                        Login
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id='signup'
+                                        class=${classMap(this.activeClassSignup)}  
+                                        @click=${this.handleIndexSession}>
+                                        Registro
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        </div>
+                        <div></div>
+                        </div>
                     </div>
                     <index-session .sessionPage=${this.sessionPage}></index-session>
                 `
@@ -101,6 +192,20 @@ class WorkspaceComp extends UtilComp {
 
     handleIndexSession(e) {
         this.sessionPage = e.target.id
+        if(this.sessionPage == 'login') {
+            this.activeClassLogin.activeClass = true
+            this.activeClassSignup.activeClass = false
+        } else {
+            this.activeClassSignup.activeClass = true
+            this.activeClassLogin.activeClass = false
+        }
+        console.log('Login', this.activeClassLogin.activeClass)
+        console.log('Signup', this.activeClassSignup.activeClass)
+        this.requestUpdate()
+    }
+
+    showMenu() {
+        console.log('abriendo menu...')
     }
 
 }

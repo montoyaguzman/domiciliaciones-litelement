@@ -1,9 +1,10 @@
 import { LitElement, html } from 'lit-element'
+import { UtilComp } from '../util/util-comp.js'
 
 import './domi-form.js'
 import './domi-table.js'
 
-class Domi extends LitElement {
+class Domi extends UtilComp {
     
     static get properties() {
         return {

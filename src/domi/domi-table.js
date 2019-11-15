@@ -1,7 +1,16 @@
-import { LitElement, html } from 'lit-element'
-import { UtilComp } from '../util/util-comp'
+import { html, css } from 'lit-element'
+import { UtilComp } from '../util/util-comp.js'
 
 class DomiTable extends UtilComp {
+    
+    static get styles() {
+        return [
+            super.styles,
+            css`
+                
+            `
+        ]
+    }
     
     static get properties() {
         return {
@@ -23,10 +32,10 @@ class DomiTable extends UtilComp {
     render() {
         return html`
             <!-- <h3>${this.domiTable} works!</h3> -->
-            <div class="card">
+            <div class="card inComplete">
                 <span>aqui van los filtros....</span>
             </div>
-            <div class="card">
+            <div class="card inComplete">
                 <h3>Consulta de domiciliaciones</h3>
                 <table>
                     <thead>

@@ -1,6 +1,17 @@
-import { LitElement, html } from 'lit-element'
+import { html, css } from 'lit-element'
+import { UtilComp } from '../util/util-comp.js'
 
-class User extends LitElement {
+class User extends UtilComp {
+
+    static get styles() {
+        return [
+            super.styles,
+            css`
+                
+            `
+        ]
+    }
+    
     
     static get properties() {
         return {
@@ -16,10 +27,10 @@ class User extends LitElement {
     render() {
         return html`
             <!-- <h1>${this.user} works!</h1> -->
-            <div class="card">
+            <div class="card inComplete">
                 Datos del usuario
             </div>
-            <div class="card">
+            <div class="card inComplete">
                 Catalogo de domiciliaciones, cards
             </div>
             <!-- <user-form></user-form> -->
