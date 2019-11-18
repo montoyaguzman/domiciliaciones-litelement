@@ -93,8 +93,14 @@ export default css`
 
   .options {
     display: grid;
-    justify-items: start;
+    justify-items: center;
     grid-template-columns: 50% 50%;
+    
+  }
+
+  .option {
+    padding: 10px;
+    text-align: center;
     
   }
   

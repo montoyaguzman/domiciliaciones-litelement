@@ -56,18 +56,26 @@ class Routing extends routerMixin(UtilComp) {
     render() {
         return html`
           <div class="menu">
-            <div></div>
+            <div style="background-color: red;">AQUI</div>
             <div class="options">
-                <div>
+                <div class="option">
+                    <img alt="home" src="../assets/img/home-ico.png">
+                    <br/>
                     <routing-link href='/'>Home</routing-link>
                 </div> 
-                <div>
+                <div class="option">
+                    <img alt="home" src="../assets/img/personal-ico.png">
+                    <br/>
                     <routing-link href='user'>Users</routing-link>
                 </div>
-                <div>
-                    <routing-link href='domi'>Domiciliaciones</routing-link>
+                <div class="option">
+                    <img alt="home" src="../assets/img/payment-ico.png">
+                    <br/>
+                    <routing-link href='domi'>Pagos</routing-link>
                 </div>
-                <div>
+                <div class="option">
+                    <img alt="home" src="../assets/img/history-ico.png">
+                    <br/>
                     <routing-link href='historic'>Historico</routing-link>
                 </div>                
             </div>
