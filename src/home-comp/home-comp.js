@@ -1,9 +1,9 @@
 import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp'
 
-import '../components/modal-app'
-import '../components/filter-app'
-import '../components/table-app'
+import '../components/modal-comp.js'
+import '../components/filter-comp.js'
+import '../components/table-comp.js'
 
 class HomeComp extends UtilComp {
     
@@ -18,13 +18,23 @@ class HomeComp extends UtilComp {
 
     static get properties() {
         return {
-            nameComp: { type: String }
+            nameComp: { type: String },
+            nameColumns: { type: Array },
+            dataList: { type: Array }
         }
     }
 
     constructor() {
         super()
         this.homeComp = 'home-comp'
+        this.nameColumns = [
+            { id: 1, name: 'nombre' },
+            { id: 2, name: 'app' }
+        ],
+        this.dataList = [
+            { name: 'jose', app: 'montoya' },
+            { name: 'charly', app: 'rodriguez' }
+        ]
     }
 
     render() {
@@ -33,7 +43,11 @@ class HomeComp extends UtilComp {
             
             <modal-comp></modal-comp>
             <filter-comp></filter-comp>
-            <table-comp></table-comp>
+            <table-comp 
+                .nameColumns=${this.nameColumns}
+                .dataList=${this.dataList}
+                >
+            </table-comp>
 
         `
     }

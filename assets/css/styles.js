@@ -3,9 +3,10 @@ import { css } from 'lit-element'
 export default css`
 
   /* ESTILOS DE ETIQUETA */
-  :root {
+  :root, html {
     --main-color: #072146;
-    --secondary-color #1d73b2;
+    --secondary-color: #1d73b2;
+    --third-color: #1d7bb2;
   }
 
   body, div, h1 {
