@@ -20,7 +20,8 @@ class HomeComp extends UtilComp {
         return {
             nameComp: { type: String },
             nameColumns: { type: Array },
-            dataList: { type: Array }
+            dataList: { type: Array },
+            selectOptions: { type: Array }
         }
     }
 
@@ -35,21 +36,53 @@ class HomeComp extends UtilComp {
             { name: 'jose', app: 'montoya' },
             { name: 'charly', app: 'rodriguez' }
         ]
+        this.selectOptions = [
+            { id: 1, description: 'option one' },
+            { id: 2, description: 'option two' }
+        ]
     }
 
     render() {
         return html`
             <h1>${this.homeComp} works!</h1>
-            
-            <modal-comp></modal-comp>
-            <filter-comp></filter-comp>
+            <!--
+            Modal works!
+            <button @click=${this.openModal}>showModal</button>
+            <modal-comp 
+                id="genericModal"
+                backdropDismiss="true"
+            >
+                <span>este es un modal</span>
+                <button @click=${this.closeModal}>Close</button>
+                <button @click=${this.continueModal}>Continue</button>
+            </modal-comp>
+
+            <filter-comp
+                .selectOptions=${this.selectOptions}
+            >
+            </filter-comp>
             <table-comp 
                 .nameColumns=${this.nameColumns}
                 .dataList=${this.dataList}
                 >
             </table-comp>
-
+            -->
         `
+    }
+
+    openModal() {
+        const modal = this.shadowRoot.getElementById('genericModal')
+        modal.open()
+    }
+
+    closeModal() {
+        const modal = this.shadowRoot.getElementById('genericModal')
+        modal.close()
+    }
+
+    continueModal(){
+        // sentences
+        console.log('ejecutando servicio...')
     }
 
 }

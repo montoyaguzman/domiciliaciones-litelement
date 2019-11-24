@@ -7,6 +7,12 @@ class TableComp extends UtilComp {
         return [
             super.styles,
             css`
+                :host {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+
                 thead {
                     color: #ffffff;
                     background-color: #1d7bb2;   
@@ -42,6 +48,7 @@ class TableComp extends UtilComp {
     static get properties() {
         return {
             tableComp: { type: String },
+            tableTile: { type: String },
             nameColumns: { type: Array },
             dataList: { type: Array }
         }
@@ -54,7 +61,8 @@ class TableComp extends UtilComp {
 
     render() {
         return html`
-            <h1>${this.tableComp} works!</h1>
+            <!-- <h1>${this.tableComp} works!</h1> -->
+            <h3>${this.tableTitle}</h3>
             <table id="dataTable">
                 <thead>
                     <tr>
