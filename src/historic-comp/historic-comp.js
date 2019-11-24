@@ -18,10 +18,10 @@ class HistoricComp extends UtilComp {
     static get properties() {
         return {
             // historicComp: { type: String }
-            tableTile: { type: String },
             selectOptions: { type: Array },
-            payments: { type: Array },
+            tableTile: { type: String },
             paymentColumns: { type: Array },
+            payments: { type: Array }
             
         }
     }
@@ -29,17 +29,11 @@ class HistoricComp extends UtilComp {
     constructor() {
         super()
         // this.historicComp = 'historic-comp'
-        this.tableTitle = 'Histórico de pagos'
-        this.payments = [
-            { alias: '1', alias: 'CFE casa', description: 'pago de la luz', cardNumber: '1234', reference: '0879', paymentDate: '12/11/2019', chargeDate: '13/11/2019', amount: '$100.00', periodicity: 'mensual', periodicityStatus: 'active', status: 'inactive', },
-            { alias: '2', alias: 'telefono de mamá', description: 'telefono del pueblito', cardNumber: '1234', reference: '0809', paymentDate: '1/11/2019', chargeDate: '1/11/2019', amount: '$300.00', periodicity: 'mensual', periodicityStatus: 'active', status: 'active', }
-        ],
-        // IdPayment: '2', IdCard: '2', IdAgreement: '3', 
-
         this.selectOptions = [
             { id: 1, description: 'Alias' },
             { id: 2, description: 'Monto' }
         ]
+        this.tableTitle = 'Histórico de pagos'
         this.paymentColumns = [
             { id: 1, name: 'Alias' },
             { id: 2, name: 'Descripcion' },
@@ -52,6 +46,12 @@ class HistoricComp extends UtilComp {
             { id: 9, name: 'Estatus de periodicidad' },
             { id: 10, name: 'Estatus de domiciliacion' }
         ]
+        this.payments = [
+            { alias: '1', alias: 'CFE casa', description: 'pago de la luz', cardNumber: '1234', reference: '0879', paymentDate: '12/11/2019', chargeDate: '13/11/2019', amount: '$100.00', periodicity: 'mensual', periodicityStatus: 'active', status: 'inactive', },
+            { alias: '2', alias: 'telefono de mamá', description: 'telefono del pueblito', cardNumber: '1234', reference: '0809', paymentDate: '1/11/2019', chargeDate: '1/11/2019', amount: '$300.00', periodicity: 'mensual', periodicityStatus: 'active', status: 'active', }
+        ]
+        // IdPayment: '2', IdCard: '2', IdAgreement: '3', 
+
     }
 
     render() {

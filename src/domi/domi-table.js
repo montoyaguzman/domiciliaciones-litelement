@@ -14,18 +14,37 @@ class DomiTable extends UtilComp {
     
     static get properties() {
         return {
-            domiTable: { type: String },
+            // domiTable: { type: String },
+            selectOptions: { type: Array },
+            domisTitle: { type: String },
+            domisColumns: { type: Array },
             domis: { type: Array }
         }
     }
 
     constructor() {
         super()
-        this.domiTable = 'domi-table'
+        // this.domiTable = 'domi-table'
+        this.selectOptions = [
+            { id: 1, description: 'Alias' },
+            { id: 2, description: 'Monto' }
+        ]
+        this.tableTitle = 'Domiciliaciones activas'
+        this.domisColumns = [
+            { id: 1, name: 'Alias' },
+            { id: 2, name: 'Descripcion' },
+            { id: 3, name: 'Referencia' },
+            { id: 4, name: 'Dia de pago' },
+            { id: 5, name: 'Periodicidad (estatus)' },
+            { id: 6, name: 'Cantidad' },
+            { id: 7, name: 'Cuenta de cobro' },
+            { id: 8, name: 'Acciones' },
+        ],
         this.domis = [
-            { serviceAlias: 'cfe', description: 'pago luz casa', reference: '0901', paymentDay: '29/09', IsPeriodic: true, periodicity: 'mensual', amount:'1,000.00', account:'2341' },
-            { serviceAlias: 'telefono mx', description: 'pago luz casa', reference: '0801', paymentDay: '10/09', IsPeriodic: true, periodicity: 'bimestral', amount:'670.00', account:'7741' },
-            { serviceAlias: 'tdc amex', description: 'pago de despensa', reference: '0701', paymentDay: '5/09', IsPeriodic: true, periodicity: 'mensual', amount:'300.50', account:'6531' }
+            { serviceAlias: 'cfe', description: 'pago luz casa', reference: '0901', paymentDay: '29/09', periodicity: 'mensual', amount:'1,000.00', account:'2341' },
+            { serviceAlias: 'telefono mx', description: 'pago luz casa', reference: '0801', paymentDay: '10/09', periodicity: 'bimestral', amount:'670.00', account:'7741' },
+            { serviceAlias: 'tdc amex', description: 'pago de despensa', reference: '0701', paymentDay: '5/09', periodicity: 'mensual', amount:'300.50', account:'6531' },
+            // IsPeriodic: true, 
         ]
     }
 
@@ -33,49 +52,18 @@ class DomiTable extends UtilComp {
         return html`
             <!-- <h3>${this.domiTable} works!</h3> -->
             <div class="card inComplete">
-                <span>aqui van los filtros....</span>
+                <filter-comp
+                    .selectOptions=${this.selectOptions}
+                >
+                </filter-comp>
             </div>
             <div class="card inComplete">
-                <h3>Consulta de domiciliaciones</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Alias</th>
-                            <th>Descripcion</th>
-                            <th>Referencia</th>
-                            <th>Dia de pago</th>
-                            <th>Periodicidad (estatus)</th>
-                            <th>Cantidad</th>
-                            <th>Cuenta de cobro</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${this.domis.map((domi) => html`
-                            <tr>
-                                <th>${domi.serviceAlias}</th>
-                                <th>${domi.description}</th>
-                                <th>${domi.reference}</th>
-                                <th>${domi.paymentDay}</th>
-                                <th>${`${domi.periodicity} (${domi.IsPeriodic})`}</th>
-                                <th>${domi.amount}</th>
-                                <th>${domi.account}</th>
-                                <th>
-                                    <img 
-                                        width="30px" 
-                                        height="30px" 
-                                        alt="editar" 
-                                        src="../assets/img/edit.png">
-                                    <img 
-                                        width="30px" 
-                                        height="30px" 
-                                        alt="borrar"
-                                        src="../assets/img/delete.png">
-                                </th>
-                            </tr>
-                        `)}
-                    </tbody>
-                </table>
+                <table-comp
+                    .tableTitle=${this.tableTitle} 
+                    .nameColumns=${this.domisColumns}
+                    .dataList=${this.domis}
+                    >
+                </table-comp>
             </div>
         `
     }
