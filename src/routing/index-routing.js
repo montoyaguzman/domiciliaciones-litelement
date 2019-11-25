@@ -6,7 +6,7 @@ import './routing-outlet.js'
 
 import '../home-comp/home-comp.js'
 import '../session/index-session.js'
-import '../user/index-user.js'
+import '../account/index-account.js'
 import '../domi/index-domi.js'
 import '../historic-comp/historic-comp.js'
 import '../not-found/not-found.js'
@@ -33,7 +33,7 @@ class Routing extends routerMixin(UtilComp) {
     static get routes() {
         return [
             { name: 'home', pattern: '/' }, 
-            { name: 'user', pattern: 'user' }, 
+            { name: 'account', pattern: 'account' }, 
             { name: 'domi', pattern: 'domi' },
             { name: 'historic', pattern: 'historic' },
             { name: 'not-found', pattern: '*' }
@@ -66,15 +66,15 @@ class Routing extends routerMixin(UtilComp) {
                 <div class="option">
                     <img alt="home" src="../assets/img/personal-ico.png">
                     <br/>
-                    <routing-link href='user'>Users</routing-link>
+                    <routing-link href='account'>Cuentas</routing-link>
                 </div>
                 <div class="option">
-                    <img alt="home" src="../assets/img/payment-ico.png">
+                    <img alt="payment" src="../assets/img/payment-ico.png">
                     <br/>
                     <routing-link href='domi'>Pagos</routing-link>
                 </div>
                 <div class="option">
-                    <img alt="home" src="../assets/img/history-ico.png">
+                    <img alt="history" src="../assets/img/history-ico.png">
                     <br/>
                     <routing-link href='historic'>Historico</routing-link>
                 </div>                
@@ -84,7 +84,7 @@ class Routing extends routerMixin(UtilComp) {
           <routing-outlet current-route=${this.route}>
               <home-comp route='home'>Home</home-comp>
               <index-session route='session'>Session |</index-session>
-              <index-user route='user'>Usuarios</index-user>
+              <index-account route='account'>Accounts</index-account>
               <index-domi route='domi'>Domiciliaciones</index-domi>
               <historic-comp route='historic'>History</historic-comp>
               <not-found route='not-found'>Not Found</not-found>
