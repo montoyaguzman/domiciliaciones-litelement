@@ -80,6 +80,7 @@ class WorkspaceComp extends UtilComp {
             userLogon: { type: Object },
             sessionPage: { type: String },
             activeClass: { type: Object },
+            optionsIsHidden: { type: Object }
         }
     }
 
@@ -88,8 +89,9 @@ class WorkspaceComp extends UtilComp {
         this.workspaceComp = 'App de domiciliaciones'
         this.userLogon = localStorage.getItem('userName') || null
         this.sessionPage = 'login'
-        this.activeClassSignup = { activeClass: false },
-        this.activeClassLogin = { activeClass: true },
+        this.activeClassSignup = { activeClass: false }
+        this.activeClassLogin = { activeClass: true }
+        this.optionsIsHidden = { optionsIsHidden: true }
 
         document.addEventListener('log-in', (e) => {
             let login = e.detail.login || ''
@@ -138,7 +140,9 @@ class WorkspaceComp extends UtilComp {
             </div>
             ${ this.userLogon
                 ? html`
-                    <index-routing></index-routing>
+                    <index-routing 
+                        .optionsIsHidden=${this.optionsIsHidden}>
+                    </index-routing>
                   `
                 : html`
                     <div class="slidesContainer">
@@ -205,7 +209,10 @@ class WorkspaceComp extends UtilComp {
     }
 
     showMenu() {
-        console.log('abriendo menu...')
+        console.log('switch menu...')
+        let newValue = !this.optionsIsHidden.optionsIsHidden
+        this.optionsIsHidden = { optionsIsHidden: newValue }
+        console.log('this.optionsIsHidden =>', this.optionsIsHidden)
     }
 
 }

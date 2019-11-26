@@ -1,16 +1,16 @@
-import { LitElement, html, css } from 'lit-element';
+import { UtilComp } from '../util/util-comp.js';
+import { html, css } from 'lit-element';
 import { routerMixin  } from 'lit-element-router';
+import { classMap } from 'lit-html/directives/class-map'
 
 import './routing-link.js'
 import './routing-outlet.js'
-
 import '../home-comp/home-comp.js'
 import '../session/index-session.js'
 import '../account/index-account.js'
 import '../domi/index-domi.js'
 import '../historic-comp/historic-comp.js'
 import '../not-found/not-found.js'
-import { UtilComp } from '../util/util-comp.js';
  
 class Routing extends routerMixin(UtilComp) {
 
@@ -26,7 +26,8 @@ class Routing extends routerMixin(UtilComp) {
     static get properties() {
         return {
             route: { type: String },
-            params: { type: Object }
+            params: { type: Object },
+            optionsIsHidden: { type: Object }
         }
     }
 
@@ -44,6 +45,7 @@ class Routing extends routerMixin(UtilComp) {
         super()
         this.route = ''
         this.params = {}
+        
     }
 
     onRoute(route, params, query, data) {
@@ -56,8 +58,8 @@ class Routing extends routerMixin(UtilComp) {
     render() {
         return html`
           <div class="menu">
-            <div style="background-color: red;">AQUI</div>
-            <div class="options">
+            <div></div>
+            <div class="options ${classMap(this.optionsIsHidden)}">
                 <div class="option">
                     <img alt="home" src="../assets/img/home-ico.png">
                     <br/>
@@ -79,6 +81,7 @@ class Routing extends routerMixin(UtilComp) {
                     <routing-link href='historic'>Historico</routing-link>
                 </div>                
             </div>
+            <div></div>
           </div>
 
           <routing-outlet current-route=${this.route}>

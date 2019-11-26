@@ -11,40 +11,35 @@ class HomeComp extends UtilComp {
         return [
             super.styles,
             css`
-                
+                :host {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                }
+
+                #background {
+                    width: 100%;
+                    height: 14rem;
+                }
             `
         ]
     }
 
     static get properties() {
         return {
-            nameComp: { type: String },
-            nameColumns: { type: Array },
-            dataList: { type: Array },
-            selectOptions: { type: Array }
+            homeComp: { type: String }
         }
     }
 
     constructor() {
         super()
         this.homeComp = 'home-comp'
-        this.nameColumns = [
-            { id: 1, name: 'nombre' },
-            { id: 2, name: 'app' }
-        ],
-        this.dataList = [
-            { name: 'jose', app: 'montoya' },
-            { name: 'charly', app: 'rodriguez' }
-        ]
-        this.selectOptions = [
-            { id: 1, description: 'option one' },
-            { id: 2, description: 'option two' }
-        ]
+        
     }
 
     render() {
         return html`
-            <h1>${this.homeComp} works!</h1>
+            <!-- <h1>${this.homeComp} works!</h1> -->
             <!--
             Modal works!
             <button @click=${this.openModal}>showModal</button>
@@ -56,16 +51,15 @@ class HomeComp extends UtilComp {
                 <button @click=${this.closeModal}>Close</button>
                 <button @click=${this.continueModal}>Continue</button>
             </modal-comp>
-
-            <filter-comp
-                .selectOptions=${this.selectOptions}
-            >
-            </filter-comp>
-            <table-comp 
-                .nameColumns=${this.nameColumns}
-                .dataList=${this.dataList}
-                >
-            </table-comp>
+            -->
+            <!--
+            <div id="background">
+                <img 
+                    width="100%"
+                    height="100%"
+                    alt="background" 
+                    src="../assets/img/background.jpg"/>
+            </div>
             -->
         `
     }

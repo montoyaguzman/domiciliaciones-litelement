@@ -88,7 +88,10 @@ export default css`
   .menu {
     display: grid;
     justify-items: end;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 61% 30% 9%;
+    position: fixed;
+    margin-top: -26px;
+    margin-left: 43rem;
 
   }
 
@@ -96,13 +99,20 @@ export default css`
     display: grid;
     justify-items: center;
     grid-template-columns: 50% 50%;
-    
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: gray 0px 0px 0px 1px;
   }
 
   .option {
-    padding: 10px;
+    padding: 8px;
+    font-size: 12px;
     text-align: center;
-    
+  }
+
+  .optionsIsHidden {
+    display: none;
+    visibility: hidden;
   }
   
 `
