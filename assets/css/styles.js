@@ -57,9 +57,9 @@ export default css`
   .card {
     display: grid;
     background: #FAFAFA;
-    padding: 24px 28px 50px 29px;
+    padding: 16px 28px 28px 29px;
     margin: 28px auto;
-    margin-top: 5px;
+    margin-top: 14px;
     box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
     border-radius: 10px;
     border: 3px solid #305A72;

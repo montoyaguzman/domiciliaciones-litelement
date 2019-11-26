@@ -1,9 +1,8 @@
-import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp'
+import { html, css } from 'lit-element'
 
-import '../components/modal-comp.js'
-import '../components/filter-comp.js'
-import '../components/table-comp.js'
+import '../components/modal-comp'
+import '../components/footer-comp'
 
 class HomeComp extends UtilComp {
     
@@ -11,16 +10,19 @@ class HomeComp extends UtilComp {
         return [
             super.styles,
             css`
+                
                 :host {
                     display: flex;
                     flex-direction: row;
+                    height: 28rem;
                     width: 100%;
                 }
 
                 #background {
                     width: 100%;
-                    height: 14rem;
+                    height: 28rem;
                 }
+
             `
         ]
     }
@@ -52,15 +54,16 @@ class HomeComp extends UtilComp {
                 <button @click=${this.continueModal}>Continue</button>
             </modal-comp>
             -->
-            <!--
+            
             <div id="background">
                 <img 
                     width="100%"
                     height="100%"
                     alt="background" 
-                    src="../assets/img/background.jpg"/>
+                    src="../assets/img/background2.jpg"/>
             </div>
-            -->
+            
+            <footer-comp></footer-comp>
         `
     }
 

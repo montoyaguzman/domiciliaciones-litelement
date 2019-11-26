@@ -26,7 +26,7 @@ class AccountsCatalog extends UtilComp {
                 
                 .item {
                     width: 20%;
-                    padding: 20px;
+                    padding: 12px;
                     text-align: center;
                 }
 

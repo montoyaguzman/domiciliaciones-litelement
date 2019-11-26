@@ -7,7 +7,14 @@ class FilterComp extends UtilComp {
         return [
             super.styles,
             css`
-                
+                :host {
+                    display: flex;
+                    flex-direction: row;
+                }
+
+                .filter {
+                    padding: 10px;
+                }
             `
         ]
     }
@@ -29,18 +36,30 @@ class FilterComp extends UtilComp {
     render() {
         return html`
             <!--<h1>${this.filterComp} works!</h1>-->
-            <select name="select" @change=${this.setSelectedOption} >
-                ${this.selectOptions.map( option => 
-                    html`
-                        <option value=${option.id}>${option.description}</option>
-                        ` 
-                )}
-            </select>
-                
-            ${this.selectedOption && this.selectedOption.description  
-                ? html`<input type="text" placeholder=${this.selectedOption.description}>`
-                : html`<input type="text" placeholder="filtro">`
-            }
+            <div class="filter">
+                <select name="select" @change=${this.setSelectedOption} >
+                    ${this.selectOptions.map( option => 
+                        html`
+                            <option value=${option.id}>${option.description}</option>
+                            ` 
+                    )}
+                </select>
+            </div>
+
+            <div class="filter">
+                ${this.selectedOption && this.selectedOption.description  
+                    ? html`<input type="text" placeholder=${this.selectedOption.description}>`
+                    : html`<input type="text" placeholder="filtro">`
+                }
+            </div>
+
+            <div class="filter">
+                <img 
+                    width="20px"
+                    height="20px"
+                    alt="buscar" 
+                    src="../assets/img/search.png"/>
+            </div>
             
         `
     }
