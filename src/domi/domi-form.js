@@ -15,7 +15,8 @@ class DomiForm extends UtilComp {
     static get properties() {
         return {
             domiForm: { type: String },
-            domi: { type: Object }
+            domi: { type: Object },
+            dummyTarjetas: { type: Array }
         }
     }
 
@@ -32,6 +33,11 @@ class DomiForm extends UtilComp {
             amount:'',
             card:''
         }
+        this.dummyTarjetas = [
+            { id: 1, numero:'1234 XXXX XXXX XXXX' },
+            { id: 2, numero:'5678 XXXX XXXX XXXX' },
+            { id: 3, numero:'2390 XXXX XXXX XXXX' }
+        ]
     }
 
     render() {
@@ -110,15 +116,13 @@ class DomiForm extends UtilComp {
                     >
                 </div>
                 <div class="row">
-                    <input 
-                        type="text" 
-                        id="card" 
-                        name="card" 
-                        .value=${this.domi.card} 
-                        @change=${e => { this.domi.card = e.currentTarget.value } }   
-                        placeholder="no. tarjeta"
-                    >
+                    Seleccione tarjeta
+                    <select name="tarjetas">
+                        ${this.dummyTarjetas.map(tarjeta => html`<option value=${tarjeta.id}>${tarjeta.numero}</option>`)}
+                    </select>
                 </div>
+                <br/>
+                <br/>
                 <div class="row">
                     <button @click=${this.saveDomi}>Guardar</button>
                 </div>
