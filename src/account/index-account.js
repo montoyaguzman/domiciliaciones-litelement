@@ -51,8 +51,11 @@ class Account extends UtilComp {
                     .dataList=${this.accounts}
                     >
                 </table-comp>
+                <br/>
+                <img alt="nueva tarjeta" src="../assets/img/add.png"/>
             </div>
             <div class="card inComplete">
+                <h3>Catálogo de servicios</h3>
                 <accounts-catalog></accounts-catalog>
             </div>
             
