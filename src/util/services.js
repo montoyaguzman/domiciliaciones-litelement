@@ -1,35 +1,56 @@
 import { SERVER, PORT } from './config.js';
 
 const urlBase = `${SERVER}:${PORT}/api`
-// validateCors()
 
-function execGet(path, params) {
+async function execGet(path, params) {
     console.log('====== EXECUTE execGet ======')
+    let url = `${urlBase}${path}`
+    if (params) {
+        url = new URL(url)
+        Object.keys(data).forEach(key => url.searchParams.append(key, data[key]))
+    }
+    let requestBody = {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin' : '*'
+        }
+    }
+
+    let request = await fetch(url, requestBody)
+    if (request.status === 200) {
+        return request.json()
+    } else {
+        console.log('error del servicio')
+        return resolve({})
+    }
+    
     
 }
 
-function execPost(path, params, body) {
+async function execPost(path, params, body) {
     
-    console.log('====== EXECUTE execPost ======')
+    console.log('========= execPost =========')
     let url = `${urlBase}${path}`
-
-    let request = {
+    let requestBody = {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin' : '*'
         },
-        mode: 'no-cors',
         body: JSON.stringify(body),
     }
 
-    return new Promise((resolve, reject) => {
-        fetch(url, request)
-        .then(response => response.json())
-        .then(data => reject(data ? JSON.parse(data) : {}))
-        .catch(error=> reject(error))
-    })
-    
+    let request = await fetch(url, requestBody)
+    if (request.status === 200) {
+        return request.json()
+    } else {
+        console.log('error del servicio')
+        return resolve({})
+    }
+
 }
 
 function execUpdate(path, params, body) {
@@ -38,21 +59,6 @@ function execUpdate(path, params, body) {
 
 function execDelete(path, params) {
     console.log('====== EXECUTE execDelete ======')
-}
-
-function validateCors() {
-    if(enabledCors) {
-        this.headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin' : '*'
-        }
-    } else {
-        this.headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    }
 }
 
 export { execGet, execPost, execUpdate, execDelete}

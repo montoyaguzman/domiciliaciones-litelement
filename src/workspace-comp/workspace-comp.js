@@ -203,8 +203,8 @@ class WorkspaceComp extends UtilComp {
             this.activeClassSignup.activeClass = true
             this.activeClassLogin.activeClass = false
         }
-        console.log('Login', this.activeClassLogin.activeClass)
-        console.log('Signup', this.activeClassSignup.activeClass)
+        // console.log('Login', this.activeClassLogin.activeClass)
+        // console.log('Signup', this.activeClassSignup.activeClass)
         this.requestUpdate()
     }
 

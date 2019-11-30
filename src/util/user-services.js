@@ -7,7 +7,11 @@ export default class UserServices {
         this.pathService = `/users`
     }
     
-    createUser(user) {
-        return callService.execPost(`${this.pathService}/sign-up`, undefined, user)
+    signup(params, user) {
+        return callService.execPost(`${this.pathService}/sign-up`, params, user)
+    }
+
+    login(params, user) {
+        return callService.execPost(`${this.pathService}/sign-in`, params, user)
     }
 }

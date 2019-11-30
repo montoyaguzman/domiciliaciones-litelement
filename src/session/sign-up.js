@@ -113,6 +113,7 @@ class SignUp extends UtilComp {
         this.shadowRoot.getElementById('app').value = ''
         this.shadowRoot.getElementById('apm').value = ''
         this.shadowRoot.getElementById('cellphone').value = ''
+        this.shadowRoot.getElementById('email').value = ''
         this.shadowRoot.getElementById('password').value = ''
     }
 
@@ -128,20 +129,21 @@ class SignUp extends UtilComp {
     }
 
     registra() {
-        
-        this.userServices.createUser(this.user).then((response) => {
-            console.log(response)
-            /*
-            if(response && response.code === 200) {
+        this.cleanUserObj()
+        this.cleanForm()
+        /*                
+        let params = undefined
+        this.userServices.signup(params, this.user).then((response) => {
+            console.log('response =>', response)
+            if(response) {
                 alert('registro exitoso!')
                 this.cleanUserObj()
                 this.cleanForm()
             } else {
                 alert('error en registro')
             }
-            */
         })
-        
+        */
     }
 
 }

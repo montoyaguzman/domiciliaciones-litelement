@@ -1,6 +1,6 @@
 import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp.js'
-import * as services from '../util/services.js'
+import UserServices from '../util/user-services.js';
 
 class LoginComp extends UtilComp {
 
@@ -17,7 +17,8 @@ class LoginComp extends UtilComp {
         return {
             // loginComp: { type: String }
             email: { type: String },
-            password: { type: String, reflect: true }
+            password: { type: String, reflect: true },
+            userServices: { type: Object }
         }
     }
 
@@ -26,6 +27,7 @@ class LoginComp extends UtilComp {
         // this.loginComp = 'login-comp'
         this.email = ''
         this.password = ''
+        this.userServices = new UserServices()
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
@@ -72,9 +74,9 @@ class LoginComp extends UtilComp {
             email: this.email,
             password: this.password
         }
-        services.execPost('login', null, user).then((response) => {
-            console.log('response: ', response)
-            if(response && response.code === 200) {
+        let params = undefined
+        this.userServices.login(params, user).then((response) => {
+            if(response) {
                 let event = new CustomEvent('log-in', {
                     detail: response,
                     bubbles: true,
