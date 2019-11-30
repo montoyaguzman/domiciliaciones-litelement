@@ -1,6 +1,6 @@
 import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp.js'
-import * as services from '../util/services.js'
+import UserServices from '../util/user-services.js';
 
 class SignUp extends UtilComp {
 
@@ -16,7 +16,8 @@ class SignUp extends UtilComp {
     static get properties() {
         return {
             // signUp: { type: String },
-            user: { type: Object }
+            user: { type: Object },
+            userServices: { type: Object }
         }
     }
 
@@ -31,6 +32,7 @@ class SignUp extends UtilComp {
             email: '',
             password: '',
         }
+        this.userServices = new UserServices()
     }
 
     render() {
@@ -127,7 +129,9 @@ class SignUp extends UtilComp {
 
     registra() {
         
-        services.execPost('signup', null, this.user).then((response) => {
+        this.userServices.createUser(this.user).then((response) => {
+            console.log(response)
+            /*
             if(response && response.code === 200) {
                 alert('registro exitoso!')
                 this.cleanUserObj()
@@ -135,7 +139,9 @@ class SignUp extends UtilComp {
             } else {
                 alert('error en registro')
             }
+            */
         })
+        
     }
 
 }
