@@ -1,7 +1,6 @@
 import { UtilComp } from '../util/util-comp'
 import { html, css } from 'lit-element'
 
-import '../components/modal-comp'
 import '../components/footer-comp'
 
 class HomeComp extends UtilComp {
@@ -41,19 +40,6 @@ class HomeComp extends UtilComp {
 
     render() {
         return html`
-            <!-- <h1>${this.homeComp} works!</h1> -->
-            <!--
-            Modal works!
-            <button @click=${this.openModal}>showModal</button>
-            <modal-comp 
-                id="genericModal"
-                backdropDismiss="true"
-            >
-                <span>este es un modal</span>
-                <button @click=${this.closeModal}>Close</button>
-                <button @click=${this.continueModal}>Continue</button>
-            </modal-comp>
-            -->
             
             <div id="background">
                 <img 
@@ -65,21 +51,6 @@ class HomeComp extends UtilComp {
             
             <footer-comp></footer-comp>
         `
-    }
-
-    openModal() {
-        const modal = this.shadowRoot.getElementById('genericModal')
-        modal.open()
-    }
-
-    closeModal() {
-        const modal = this.shadowRoot.getElementById('genericModal')
-        modal.close()
-    }
-
-    continueModal(){
-        // sentences
-        console.log('ejecutando servicio...')
     }
 
 }

@@ -2,7 +2,7 @@ import { SERVER, PORT, API_TOKEN } from './config.js';
 
 const urlBase = `${SERVER}:${PORT}/api`
 
-async function execGet(path, params) {
+async function execGet(path, params, auth) {
     console.log('====== EXECUTE execGet ======')
     let url = `${urlBase}${path}`
     if (params) {
@@ -14,7 +14,8 @@ async function execGet(path, params) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin' : '*'
+            'Access-Control-Allow-Origin' : '*',
+            'Authorization': `Bearer ${auth}`
         }
     }
 
@@ -62,7 +63,6 @@ function login(path, auth, body) {
     let url = `${urlBase}${path}`
     let str = `${auth.username}:${auth.password}`
     let auths = btoa(str)
-    console.log(auths)
     let requestBody = {
         method: 'POST',
         headers: {

@@ -1,8 +1,10 @@
 import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp.js'
+import CardServices from '../util/card-services.js'
 
 import '../components/table-comp.js'
 import './accounts-catalog.js'
+import '../components/modal-comp.js'
 
 class Account extends UtilComp {
 
@@ -21,7 +23,8 @@ class Account extends UtilComp {
             // account: { type: String }
             accountTableTitle: { type: String },
             accountColumns: { type: Array },
-            accounts: { type: Array }
+            accounts: { type: Array },
+            cardServices: { type: Object }
         }
     }
 
@@ -30,15 +33,12 @@ class Account extends UtilComp {
         // this.account = 'index-account'
         this.accountTableTitle = 'Cuentas/Tarjetas'
         this.accountColumns = [
-            { id: 1, name: 'Producto' },
-            { id: 2, name: 'Terminación' }, 
-            { id: 3, name: 'Vencimiento' }, 
-            { id: 4, name: 'Celular Vinculado' }
+            { id: 1, name: 'No. Trajeta' }, 
+            { id: 2, name: 'Vencimiento' }
         ],
-        this.accounts = [
-            { producto: 'Libreton', terminacion: '**** **** **** 4523', vencimiento: '20/24', celular: '5599691234' },
-            { producto: 'TDC Gold', terminacion: '**** **** **** 0920', vencimiento: '01/22', celular: '5599691234' }
-        ]
+        this.accounts = []
+        this.cardServices = new CardServices()
+        this.getCards()
     }
 
     render() {
@@ -52,7 +52,22 @@ class Account extends UtilComp {
                     >
                 </table-comp>
                 <br/>
-                <img alt="nueva tarjeta" src="../assets/img/add.png"/>
+                <img 
+                    alt="nueva tarjeta" 
+                    src="../assets/img/add.png"
+                    @click=${this.openModal}
+                />
+                <!--
+                    <button @click=${this.openModal}>showModal</button>-->
+                    <modal-comp 
+                        id="genericModal"
+                        backdropDismiss="true"
+                    >
+                        <span>este es un modal</span>
+                        <button @click=${this.closeModal}>Close</button>
+                        <button @click=${this.continueModal}>Continue</button>
+                    </modal-comp>
+                
             </div>
             <div class="card inComplete">
                 <h3>Catálogo de servicios</h3>
@@ -60,6 +75,40 @@ class Account extends UtilComp {
             </div>
             
         `
+    }
+
+    closeModal() {
+        const modal = this.shadowRoot.getElementById('genericModal')
+        modal.close()
+    }
+
+    continueModal() {
+        console.log('ejecutando servicio...')
+    }
+
+    getCards() {
+        let params = undefined
+        let auth = localStorage.getItem('token')
+        this.cardServices.getAllCards(params, auth).then((response) => {
+            if(response) {
+                let accounts = []
+                response.data.map((tarjeta) => {
+                    let newObject = { 
+                        number: tarjeta.cardsNumber, 
+                        expirationDate: tarjeta.expirationDate 
+                    }
+                    accounts.push(newObject)
+                })
+                this.accounts = accounts
+            } else {
+                alert('Error en getCards')
+            }
+        }).catch(error => alert('Ha ocurrido un problema', error) )
+    }
+
+    openModal() {
+        const modal = this.shadowRoot.getElementById('genericModal')
+        modal.open()
     }
 
 }

@@ -4,11 +4,11 @@ import * as callService from './services.js'
 export default class CardServices {
     
     constructor() {
-        this.pathService = `/card`
+        this.pathService = `/cards`
     }
     
-    getAllCard(params, user) {
-        return callService.execGet(`${this.pathService}/`, params)
+    getAllCards(params, auth) {
+        return callService.execGet(`${this.pathService}/`, params, auth)
     }
 
     createCard(params, user) {

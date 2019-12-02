@@ -98,6 +98,7 @@ class WorkspaceComp extends UtilComp {
             let username = e.detail.user.name || ''
             if (token) {
                 localStorage.setItem('username', username)
+                localStorage.setItem('token', token)
                 this.userLogon = localStorage.getItem('username')
             }
         })
@@ -116,7 +117,7 @@ class WorkspaceComp extends UtilComp {
                 <div class="titleApp">
                     <h1>${this.workspaceComp}</h1>
                     ${ this.userLogon 
-                        ? html`<br/> <h4>¡Bienvenido ${this.userLogon} !</h4>`
+                        ? html`<br/> <h4>¡Bienvenido ${this.userLogon}!</h4>`
                         : html ``
                     }
                 </div>

@@ -87,7 +87,7 @@ class LoginComp extends UtilComp {
             } else {
                 alert('error en login')
             }
-        })
+        }).catch(error => alert('Ha ocurrido un problema', error) )
         
     }
 
