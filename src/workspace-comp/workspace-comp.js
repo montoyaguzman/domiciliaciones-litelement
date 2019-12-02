@@ -87,17 +87,18 @@ class WorkspaceComp extends UtilComp {
     constructor() {
         super()
         this.workspaceComp = 'App de domiciliaciones'
-        this.userLogon = localStorage.getItem('userName') || null
+        this.userLogon = localStorage.getItem('username') || null
         this.sessionPage = 'login'
         this.activeClassSignup = { activeClass: false }
         this.activeClassLogin = { activeClass: true }
         this.optionsIsHidden = { optionsIsHidden: true }
 
         document.addEventListener('log-in', (e) => {
-            let login = e.detail.login || ''
-            if (login) {
-                localStorage.setItem('userName', e.detail.email)
-                this.userLogon = localStorage.getItem('userName')
+            let token = e.detail.token || ''
+            let username = e.detail.user.name || ''
+            if (token) {
+                localStorage.setItem('username', username)
+                this.userLogon = localStorage.getItem('username')
             }
         })
         
@@ -114,6 +115,10 @@ class WorkspaceComp extends UtilComp {
             <div class="banner">
                 <div class="titleApp">
                     <h1>${this.workspaceComp}</h1>
+                    ${ this.userLogon 
+                        ? html`<br/> <h4>¡Bienvenido ${this.userLogon} !</h4>`
+                        : html ``
+                    }
                 </div>
                 <div></div>
                 <div></div>

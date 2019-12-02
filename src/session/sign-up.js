@@ -1,6 +1,6 @@
 import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp.js'
-import UserServices from '../util/user-services.js';
+import LoginServices from '../util/login-services.js';
 
 class SignUp extends UtilComp {
 
@@ -17,7 +17,7 @@ class SignUp extends UtilComp {
         return {
             // signUp: { type: String },
             user: { type: Object },
-            userServices: { type: Object }
+            loginServices: { type: Object }
         }
     }
 
@@ -26,13 +26,12 @@ class SignUp extends UtilComp {
         // this.signUp = 'sign-up',
         this.user = {
             name: '',
-            app: '',
-            apm: '',
+            lastName: '',
             cellphone: '',
             email: '',
             password: '',
         }
-        this.userServices = new UserServices()
+        this.loginServices = new LoginServices()
     }
 
     render() {
@@ -45,27 +44,17 @@ class SignUp extends UtilComp {
                         id="name" name="name" 
                         .value=${this.user.name} 
                         @change=${e => { this.user.name = e.currentTarget.value } }
-                        placeholder="name"
+                        placeholder="nombre"
                     >
                 </div>
                 <div class="row">
                     <input 
                         type="text" 
-                        id="app" 
-                        name="app" 
-                        .value=${this.user.app} 
-                        @change=${e => { this.user.app = e.currentTarget.value } }
-                        placeholder="app">
-                </div>
-                <div class="row">
-                    <input 
-                        type="text" 
-                        id="apm" 
-                        name="apm" 
-                        .value=${this.user.apm} 
-                        @change=${e => { this.user.apm = e.currentTarget.value } }
-                        placeholder="apm"
-                    >
+                        id="lastName" 
+                        name="lastName" 
+                        .value=${this.user.lastName} 
+                        @change=${e => { this.user.lastName = e.currentTarget.value } }
+                        placeholder="apellidos">
                 </div>
                 <div class="row">
                     <input 
@@ -74,7 +63,7 @@ class SignUp extends UtilComp {
                         name="cellphone" 
                         .value=${this.user.cellphone} 
                         @change=${e => { this.user.cellphone = e.currentTarget.value } }
-                        placeholder="cellphone"
+                        placeholder="celular"
                     >
                 </div>
                 <div class="row">
@@ -100,7 +89,7 @@ class SignUp extends UtilComp {
                 <div class="row">
                     <button 
                         class="button-success pure-button"
-                        @click=${this.registra}>
+                        @click=${this.signup}>
                             Registrar
                     </button>
                 </div>
@@ -110,8 +99,7 @@ class SignUp extends UtilComp {
 
     cleanForm() {
         this.shadowRoot.getElementById('name').value = ''
-        this.shadowRoot.getElementById('app').value = ''
-        this.shadowRoot.getElementById('apm').value = ''
+        this.shadowRoot.getElementById('lastName').value = ''
         this.shadowRoot.getElementById('cellphone').value = ''
         this.shadowRoot.getElementById('email').value = ''
         this.shadowRoot.getElementById('password').value = ''
@@ -120,21 +108,16 @@ class SignUp extends UtilComp {
     cleanUserObj() {
         this.user = {
             name: '',
-            app: '',
-            apm: '',
+            lastName: '',
             cellphone: '',
             email: '',
             password: '',
         }
     }
 
-    registra() {
-        this.cleanUserObj()
-        this.cleanForm()
-        /*                
+    signup() {             
         let params = undefined
-        this.userServices.signup(params, this.user).then((response) => {
-            console.log('response =>', response)
+        this.loginServices.signup(params, this.user).then((response) => {
             if(response) {
                 alert('registro exitoso!')
                 this.cleanUserObj()
@@ -143,7 +126,6 @@ class SignUp extends UtilComp {
                 alert('error en registro')
             }
         })
-        */
     }
 
 }

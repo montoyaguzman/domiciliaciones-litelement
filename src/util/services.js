@@ -1,4 +1,4 @@
-import { SERVER, PORT } from './config.js';
+import { SERVER, PORT, API_TOKEN } from './config.js';
 
 const urlBase = `${SERVER}:${PORT}/api`
 
@@ -29,7 +29,7 @@ async function execGet(path, params) {
     
 }
 
-async function execPost(path, params, body) {
+function execPost(path, params, body) {
     
     console.log('========= execPost =========')
     let url = `${urlBase}${path}`
@@ -43,13 +43,53 @@ async function execPost(path, params, body) {
         body: JSON.stringify(body),
     }
 
-    let request = await fetch(url, requestBody)
-    if (request.status === 200) {
-        return request.json()
-    } else {
-        console.log('error del servicio')
-        return resolve({})
+    return new Promise((resolve, reject) => {
+        fetch(url, requestBody)
+            .then(response => {                  
+                if(!response.ok)
+                    return response.json()
+                resolve(response.status != '204' ? response.json() : response)
+            })
+            .then(data => reject(data))
+            .catch(error => reject(error))
+    })
+
+}
+
+function login(path, auth, body) {
+    body.apiKeyToken = API_TOKEN
+    console.log('========= execPost =========')
+    let url = `${urlBase}${path}`
+    let str = `${auth.username}:${auth.password}`
+    let auths = btoa(str)
+    console.log(auths)
+    let requestBody = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin' : '*',
+            'Authorization': `Basic ${auths}`
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify(body),
     }
+
+    // requestBody.headers.set('Authorization', 'Basic ' + btoa(auth.username + ":" + auth.password));
+
+
+    console.log(requestBody)
+
+    return new Promise((resolve, reject) => {
+        fetch(url, requestBody)
+            .then(response => {                  
+                if(!response.ok)
+                    return response.json()
+                resolve(response.status != '204' ? response.json() : response)
+            })
+            .then(data => reject(data))
+            .catch(error => reject(error))
+    })
 
 }
 
@@ -61,4 +101,4 @@ function execDelete(path, params) {
     console.log('====== EXECUTE execDelete ======')
 }
 
-export { execGet, execPost, execUpdate, execDelete}
+export { execGet, execPost, execUpdate, execDelete, login }

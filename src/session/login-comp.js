@@ -1,6 +1,6 @@
 import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp.js'
-import UserServices from '../util/user-services.js';
+import LoginServices from '../util/login-services.js';
 
 class LoginComp extends UtilComp {
 
@@ -18,7 +18,7 @@ class LoginComp extends UtilComp {
             // loginComp: { type: String }
             email: { type: String },
             password: { type: String, reflect: true },
-            userServices: { type: Object }
+            loginServices: { type: Object }
         }
     }
 
@@ -27,7 +27,7 @@ class LoginComp extends UtilComp {
         // this.loginComp = 'login-comp'
         this.email = ''
         this.password = ''
-        this.userServices = new UserServices()
+        this.loginServices = new LoginServices()
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
@@ -70,12 +70,13 @@ class LoginComp extends UtilComp {
     }
 
     login() {
-        let user = {
-            email: this.email,
+        let auth = {
+            username: this.email,
             password: this.password
         }
-        let params = undefined
-        this.userServices.login(params, user).then((response) => {
+        let body = { apiKeyToken: '' }
+        this.loginServices.login(auth, body).then((response) => {
+            console.log('response =>', response)
             if(response) {
                 let event = new CustomEvent('log-in', {
                     detail: response,
