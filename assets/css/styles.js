@@ -27,6 +27,7 @@ export default css`
 
   /* ESTILOS DE CLASE */
   .button-success,
+  .button-cancel,
   .button-error,
   .button-warning,
   .button-secondary {
@@ -40,6 +41,11 @@ export default css`
 
   .button-success {
     background: #072146;
+  }
+
+  .button-cancel {
+    color: black;
+    background: #D3D3D3;
   }
 
   .button-error {

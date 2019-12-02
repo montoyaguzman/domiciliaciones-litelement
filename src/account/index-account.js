@@ -24,7 +24,8 @@ class Account extends UtilComp {
             accountTableTitle: { type: String },
             accountColumns: { type: Array },
             accounts: { type: Array },
-            cardServices: { type: Object }
+            cardServices: { type: Object },
+            card: { type: Object }
         }
     }
 
@@ -37,6 +38,11 @@ class Account extends UtilComp {
             { id: 2, name: 'Vencimiento' }
         ],
         this.accounts = []
+        this.card = {
+            cardsNumber: '',
+            expirationDate: '',
+            ccv: ''
+        }
         this.cardServices = new CardServices()
         this.getCards()
     }
@@ -63,9 +69,44 @@ class Account extends UtilComp {
                         id="genericModal"
                         backdropDismiss="true"
                     >
-                        <span>este es un modal</span>
-                        <button @click=${this.closeModal}>Close</button>
-                        <button @click=${this.continueModal}>Continue</button>
+                        <h3>Alta Tarjetas</h3>
+                        <div class="row">
+                            <input 
+                                type="text" 
+                                id="cardsNumber" 
+                                name="cardsNumber"
+                                .value=${this.card.cardsNumber}
+                                @change=${e => { this.card.cardsNumber = e.currentTarget.value } }
+                                placeholder="numero de tarjeta">
+                        </div>
+                        <div class="row">
+                            <input 
+                                type="text" 
+                                id="expirationDate" 
+                                name="expirationDate"
+                                .value=${this.card.expirationDate}
+                                @change=${e => { this.card.expirationDate = e.currentTarget.value } }
+                                placeholder="vencimiento">
+                        </div>
+                        <div class="row">
+                            <input 
+                                type="password" 
+                                id="ccv" 
+                                name="ccv"
+                                .value=${this.card.ccv}
+                                @change=${e => { this.card.ccv = e.currentTarget.value } }
+                                placeholder="cvv">
+                        </div>
+                        <button 
+                            class="button-cancel pure-button"
+                            @click=${this.closeModal}>
+                                Close
+                            </button>
+                        <button
+                            class="button-success pure-button" 
+                            @click=${this.createCard}>
+                            Continue
+                        </button>
                     </modal-comp>
                 
             </div>
@@ -77,13 +118,37 @@ class Account extends UtilComp {
         `
     }
 
+    cleanCardForm() {
+        this.card = {
+            cardsNumber: '',
+            expirationDate: '',
+            ccv: ''
+        }
+    }
+
+    cleanCardObject() {
+        this.shadowRoot.getElementById('cardsNumber').value = ''
+        this.shadowRoot.getElementById('expirationDate').value = ''
+        this.shadowRoot.getElementById('ccv').value = ''
+    }
+
     closeModal() {
         const modal = this.shadowRoot.getElementById('genericModal')
         modal.close()
     }
 
-    continueModal() {
-        console.log('ejecutando servicio...')
+    createCard() {
+        let auth = localStorage.getItem('token')
+        let params = undefined
+        this.cardServices.createCard(params, this.card, auth).then((response) => {
+            if(response) {
+                alert('Tarjeta registrada')
+                this.cleanCardObject()
+                this.cleanCardForm()
+            } else {
+                alert('error en login')
+            }
+        }).catch(error => alert('Ha ocurrido un problema', error) )
     }
 
     getCards() {

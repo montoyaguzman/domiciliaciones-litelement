@@ -30,7 +30,7 @@ async function execGet(path, params, auth) {
     
 }
 
-function execPost(path, params, body) {
+function execPost(path, params, body, auth) {
     
     console.log('========= execPost =========')
     let url = `${urlBase}${path}`
@@ -39,7 +39,8 @@ function execPost(path, params, body) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin' : '*'
+            'Access-Control-Allow-Origin' : '*',
+            'Authorization': `Bearer ${auth}`
         },
         body: JSON.stringify(body),
     }

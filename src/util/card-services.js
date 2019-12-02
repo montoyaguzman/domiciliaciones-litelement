@@ -11,7 +11,7 @@ export default class CardServices {
         return callService.execGet(`${this.pathService}/`, params, auth)
     }
 
-    createCard(params, user) {
-        return callService.execPost(`${this.pathService}/`, params, user)
+    createCard(params, card, auth) {
+        return callService.execPost(`${this.pathService}/`, params, card, auth)
     }
 }
