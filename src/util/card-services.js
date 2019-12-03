@@ -14,4 +14,12 @@ export default class CardServices {
     createCard(params, card, auth) {
         return callService.execPost(`${this.pathService}/`, params, card, auth)
     }
+
+    deleteCard(params, urlParameter, auth) {
+        return callService.execDelete(`${this.pathService}/${urlParameter}`, params, auth)
+    }
+
+    editCard() {
+
+    }
 }

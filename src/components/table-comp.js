@@ -10,6 +10,7 @@ class TableComp extends UtilComp {
                 :host {
                     display: flex;
                     flex-direction: column;
+                    width: 100%;
                 }
 
 
@@ -50,7 +51,8 @@ class TableComp extends UtilComp {
             tableComp: { type: String },
             tableTile: { type: String },
             nameColumns: { type: Array },
-            dataList: { type: Array }
+            dataList: { type: Array },
+            actionsList: { type: Array }
         }
     }
 
@@ -70,17 +72,25 @@ class TableComp extends UtilComp {
                             ? this.nameColumns.map( column => html`<td>${column.name}</td>`)
                             : html`<div>no existe nameColumns</div>`
                         }
+                        ${this.actionsList
+                            ? html`<td>Acciones</td>`
+                            : html``
+                        }
                     </tr>
                 </thead>
                 <tbody>
-                    ${this.dataList.map(element => {
+                    ${this.dataList.map((element, index) => {
                         return html`
                             <tr>
-                                ${(Object.values(element)).map( (value) => 
+                                ${(Object.values(element)).map(value => 
                                     html`
                                         <td>${value}</td>
                                     `
-                                )}    
+                                )}
+                                ${this.actionsList
+                                    ? html`<td>${this.getActions(this.actionsList, index)}</td>` 
+                                    : html`` 
+                                }    
                             </tr>
                         `
                     })}
@@ -88,6 +98,27 @@ class TableComp extends UtilComp {
             </table>
 
         `
+    }
+
+    getActions(actionsList, index) {
+        return actionsList.map((action) => 
+            html`
+                <img 
+                    alt=${action.name} 
+                    src="../assets/img/${action.action}.png" 
+                    @click=${event => this.execEvent(index, action.action)}
+                />
+            `)
+    }
+
+    execEvent(id, action) {
+        let dispatcher = { id: id, action: action }
+        let newEvent = new CustomEvent('exec-event', {
+            detail: dispatcher,
+            bubbles: true,
+            composed: true 
+        })
+        this.dispatchEvent(newEvent)
     }
 
 }

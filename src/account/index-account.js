@@ -3,7 +3,7 @@ import { UtilComp } from '../util/util-comp.js'
 import CardServices from '../util/card-services.js'
 
 import '../components/table-comp.js'
-import './accounts-catalog.js'
+import './cards-catalog.js'
 import '../components/modal-comp.js'
 
 class Account extends UtilComp {
@@ -23,10 +23,11 @@ class Account extends UtilComp {
             // account: { type: String }
             accountTableTitle: { type: String },
             accountColumns: { type: Array },
-            accounts: { type: Array },
+            cards: { type: Array },
             cardServices: { type: Object },
             card: { type: Object },
-            serviceCatalog: { type: Array }
+            serviceCatalog: { type: Array },
+            actionsCards: { type: Array }
         }
     }
 
@@ -35,10 +36,15 @@ class Account extends UtilComp {
         // this.account = 'index-account'
         this.accountTableTitle = 'Cuentas/Tarjetas'
         this.accountColumns = [
+            { id: 0, name: 'Id' },
             { id: 1, name: 'No. Trajeta' }, 
             { id: 2, name: 'Vencimiento' }
-        ],
-        this.accounts = []
+        ]
+        this.actionsCards = [
+            { id: 1, name: 'edita', action: 'edit' },
+            { id: 2, name: 'elimina', action: 'delete' }
+        ]
+        this.cards = []
         this.card = {
             cardsNumber: '',
             expirationDate: '',
@@ -48,6 +54,14 @@ class Account extends UtilComp {
         this.cardServices = new CardServices()
         this.getCards()
         this.getCatalog()
+
+        document.addEventListener('exec-event', (e) => {
+            let id = parseInt(e.detail.id)
+            let action = parseInt(e.detail.action)
+            action === 'edit'
+                ? this.editCard(id)
+                : this.deleteCard(id)
+        })
     }
 
     render() {
@@ -57,7 +71,8 @@ class Account extends UtilComp {
                 <table-comp
                     .tableTitle=${this.accountTableTitle} 
                     .nameColumns=${this.accountColumns}
-                    .dataList=${this.accounts}
+                    .dataList=${this.cards}
+                    .actionsList=${this.actionsCards}
                     >
                 </table-comp>
                 <br/>
@@ -115,9 +130,9 @@ class Account extends UtilComp {
             </div>
             <div class="card inComplete">
                 <h3>Catálogo de servicios</h3>
-                <accounts-catalog
+                <cards-catalog
                     .serviceCatalog=${this.serviceCatalog}
-                ></accounts-catalog>
+                ></cards-catalog>
             </div>
             
         `
@@ -143,7 +158,7 @@ class Account extends UtilComp {
     }
 
     createCard() {
-        let auth = localStorage.getItem('token')
+        let auth = localStorage.getItem('token') || ''
         let params = undefined
         this.cardServices.createCard(params, this.card, auth).then((response) => {
             if(response) {
@@ -156,20 +171,39 @@ class Account extends UtilComp {
         }).catch(error => alert('Ha ocurrido un problema', error) )
     }
 
+    editCard(id) {
+        console.log('llamando de edicion', id)
+
+    }
+
+    deleteCard(id) {
+        let urlParameter = this.cards[id].id
+        let params = undefined
+        let auth = localStorage.getItem('token') || ''
+        this.cardServices.deleteCard(params, urlParameter, auth).then((response) => {
+            if(response) {
+                alert('Eliminacion exitosa')
+            } else {
+                alert('Error en getCards')
+            }
+        }).catch(error => alert('Ha ocurrido un problema', error) )
+    }
+
     getCards() {
         let params = undefined
-        let auth = localStorage.getItem('token')
+        let auth = localStorage.getItem('token') || ''
         this.cardServices.getAllCards(params, auth).then((response) => {
             if(response) {
-                let accounts = []
+                let cards = []
                 response.data.map((tarjeta) => {
                     let newObject = { 
+                        id: tarjeta._id,
                         number: tarjeta.cardsNumber, 
                         expirationDate: tarjeta.expirationDate 
                     }
-                    accounts.push(newObject)
+                    cards.push(newObject)
                 })
-                this.accounts = accounts
+                this.cards = cards
             } else {
                 alert('Error en getCards')
             }
@@ -185,18 +219,18 @@ class Account extends UtilComp {
         ]
         /*
         let params = undefined
-        let auth = localStorage.getItem('token')
+        let auth = localStorage.getItem('token') || ''
         this.cardServices.getAllCards(params, auth).then((response) => {
             if(response) {
-                let accounts = []
+                let cards = []
                 response.data.map((tarjeta) => {
                     let newObject = { 
                         number: tarjeta.cardsNumber, 
                         expirationDate: tarjeta.expirationDate 
                     }
-                    accounts.push(newObject)
+                    cards.push(newObject)
                 })
-                this.accounts = accounts
+                this.cards = cards
             } else {
                 alert('Error en getCards')
             }

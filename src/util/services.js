@@ -76,11 +76,6 @@ function login(path, auth, body) {
         body: JSON.stringify(body),
     }
 
-    // requestBody.headers.set('Authorization', 'Basic ' + btoa(auth.username + ":" + auth.password));
-
-
-    console.log(requestBody)
-
     return new Promise((resolve, reject) => {
         fetch(url, requestBody)
             .then(response => {                  
@@ -98,8 +93,32 @@ function execUpdate(path, params, body) {
     console.log('====== EXECUTE execUpdate ======')
 }
 
-function execDelete(path, params) {
+function execDelete(path, params, auth) {
     console.log('====== EXECUTE execDelete ======')
+    let url = `${urlBase}${path}`
+    let requestBody = {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin' : '*',
+            'Authorization': `Bearer ${auth}`
+        }
+    }
+
+    console.log(url)
+    console.log(requestBody)
+
+    return new Promise((resolve, reject) => {
+        fetch(url, requestBody)
+            .then(response => {                  
+                if(!response.ok)
+                    return response.json()
+                resolve(response.status != '204' ? response.json() : response)
+            })
+            .then(data => reject(data))
+            .catch(error => reject(error))
+    })
 }
 
 export { execGet, execPost, execUpdate, execDelete, login }

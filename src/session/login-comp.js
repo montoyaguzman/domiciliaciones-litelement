@@ -76,7 +76,6 @@ class LoginComp extends UtilComp {
         }
         let body = { apiKeyToken: '' }
         this.loginServices.login(auth, body).then((response) => {
-            console.log('response =>', response)
             if(response) {
                 let event = new CustomEvent('log-in', {
                     detail: response,

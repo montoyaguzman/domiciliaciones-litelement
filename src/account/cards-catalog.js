@@ -1,7 +1,7 @@
 import { html, css } from 'lit-element'
 import { UtilComp } from '../util/util-comp.js'
 
-class AccountsCatalog extends UtilComp {
+class CardsCatalog extends UtilComp {
 
     static get styles() {
         return [
@@ -37,13 +37,13 @@ class AccountsCatalog extends UtilComp {
     
     static get properties() {
         return {
-            // accountsCatalog: { type: String }
+            // cardsCatalog: { type: String }
         }
     }
 
     constructor() {
         super()
-        // this.accountsCatalog = 'accounts-catalog'
+        // this.cardsCatalog = 'cards-catalog'
     }
 
     render() {
@@ -68,4 +68,4 @@ class AccountsCatalog extends UtilComp {
 
 }
 
-customElements.define('accounts-catalog', AccountsCatalog)
+customElements.define('cards-catalog', CardsCatalog)
