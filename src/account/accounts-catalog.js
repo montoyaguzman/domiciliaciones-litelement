@@ -51,58 +51,15 @@ class AccountsCatalog extends UtilComp {
             <!-- <h1>${this.user} works!</h1> -->
             <div class="catalog">
                 <div class="row">
-                    <div class="item">
-                        <img alt="service" src="../assets/img/service.png"/>
-                        <br/>
-                        <span>Servicio</span>
-                    </div>
-                    <div class="item">
-                        <img alt="service" src="../assets/img/service.png"/>
-                        <br/>
-                        <span>Servicio</span>
-                    </div>
-                    <div class="item">
-                        <img alt="service" src="../assets/img/service.png"/>
-                        <br/>
-                        <span>Servicio</span>
-                    </div>
-                    <div class="item">
-                        <img alt="service" src="../assets/img/service.png"/>
-                        <br/>
-                        <span>Servicio</span>
-                    </div>
-                    <div class="item">
-                        <img alt="service" src="../assets/img/service.png"/>
-                        <br/>
-                        <span>Servicio</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="item">
-                        <img alt="service" src="../assets/img/service.png"/>
-                        <br/>
-                        <span>Servicio</span>
-                    </div>
-                    <div class="item">
-                        <img alt="service" src="../assets/img/service.png"/>
-                        <br/>
-                        <span>Servicio</span>
-                    </div>
-                    <div class="item">
-                        <img alt="service" src="../assets/img/service.png"/>
-                        <br/>
-                        <span>Servicio</span>
-                    </div>
-                    <div class="item">
-                        <img alt="service" src="../assets/img/service.png"/>
-                        <br/>
-                        <span>Servicio</span>
-                    </div>
-                    <div class="item">
-                        <img alt="service" src="../assets/img/service.png"/>
-                        <br/>
-                        <span>Servicio</span>
-                    </div>
+                    ${this.serviceCatalog.map((service) => 
+                        html`
+                            <div class="item">
+                                <img alt=${service.name} src="../assets/img/${service.img}.png"/>
+                                <br/>
+                                <span>${service.name}</span>
+                            </div>
+                        `
+                    )}
                 </div>
             </div>
             

@@ -25,7 +25,8 @@ class Account extends UtilComp {
             accountColumns: { type: Array },
             accounts: { type: Array },
             cardServices: { type: Object },
-            card: { type: Object }
+            card: { type: Object },
+            serviceCatalog: { type: Array }
         }
     }
 
@@ -43,8 +44,10 @@ class Account extends UtilComp {
             expirationDate: '',
             ccv: ''
         }
+        this.serviceCatalog = []
         this.cardServices = new CardServices()
         this.getCards()
+        this.getCatalog()
     }
 
     render() {
@@ -112,7 +115,9 @@ class Account extends UtilComp {
             </div>
             <div class="card inComplete">
                 <h3>Catálogo de servicios</h3>
-                <accounts-catalog></accounts-catalog>
+                <accounts-catalog
+                    .serviceCatalog=${this.serviceCatalog}
+                ></accounts-catalog>
             </div>
             
         `
@@ -169,6 +174,34 @@ class Account extends UtilComp {
                 alert('Error en getCards')
             }
         }).catch(error => alert('Ha ocurrido un problema', error) )
+    }
+
+    getCatalog() {
+        this.serviceCatalog = [
+            { id: 1, name: 'Telmex', img:'telmex' },
+            { id: 2, name: 'CFE', img:'cfe' },
+            { id: 3, name: 'Liverpool', img:'liverpool' },
+            { id: 4, name: 'Amex', img:'amex' }
+        ]
+        /*
+        let params = undefined
+        let auth = localStorage.getItem('token')
+        this.cardServices.getAllCards(params, auth).then((response) => {
+            if(response) {
+                let accounts = []
+                response.data.map((tarjeta) => {
+                    let newObject = { 
+                        number: tarjeta.cardsNumber, 
+                        expirationDate: tarjeta.expirationDate 
+                    }
+                    accounts.push(newObject)
+                })
+                this.accounts = accounts
+            } else {
+                alert('Error en getCards')
+            }
+        }).catch(error => alert('Ha ocurrido un problema', error) )
+        */
     }
 
     openModal() {
