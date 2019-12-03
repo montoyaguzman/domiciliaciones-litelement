@@ -32,7 +32,7 @@ async function execGet(path, params, auth) {
 
 function execPost(path, params, body, auth) {
     
-    console.log('========= execPost =========')
+    console.log('========= execPost =========', body)
     let url = `${urlBase}${path}`
     let requestBody = {
         method: 'POST',

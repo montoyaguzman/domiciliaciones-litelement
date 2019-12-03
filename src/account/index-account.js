@@ -217,10 +217,10 @@ class Account extends UtilComp {
 
     getCatalog() {
         this.serviceCatalog = [
-            { id: 1, name: 'Telmex', img:'telmex' },
-            { id: 2, name: 'CFE', img:'cfe' },
-            { id: 3, name: 'Liverpool', img:'liverpool' },
-            { id: 4, name: 'Amex', img:'amex' }
+            { id: '1123456781234567812345678', name: 'Telmex', img:'telmex' },
+            { id: '2123456781234567812345678', name: 'CFE', img:'cfe' },
+            { id: '3123456791234567912345679', name: 'Liverpool', img:'liverpool' },
+            { id: '4123456791234567912345679', name: 'Amex', img:'amex' }
         ]
     }
 
