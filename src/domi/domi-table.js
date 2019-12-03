@@ -79,7 +79,6 @@ class DomiTable extends UtilComp {
         let params = undefined
         let auth = localStorage.getItem('token') || ''
         this.domisServices.getAllDomis(params, auth).then((response) => {
-            console.log('response =>', response)
             if(response) {
                 let domis = []
                 response.data.map((domi) => {

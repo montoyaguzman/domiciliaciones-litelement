@@ -89,8 +89,27 @@ function login(path, auth, body) {
 
 }
 
-function execUpdate(path, params, body) {
-    console.log('====== EXECUTE execUpdate ======')
+async function execPut(path, params, body, auth) {
+    console.log('====== EXECUTE execUpdate ======', body)
+    let url = `${urlBase}${path}`
+    let requestBody = {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin' : '*',
+            'Authorization': `Bearer ${auth}`
+        },
+        body: JSON.stringify(body),
+    }
+
+    let request = await fetch(url, requestBody)
+    if (request.status) {
+        return {id: request.status}
+    } else {
+        console.log('error del servicio')
+        return resolve({})
+    }
 }
 
 function execDelete(path, params, auth) {
@@ -106,9 +125,6 @@ function execDelete(path, params, auth) {
         }
     }
 
-    console.log(url)
-    console.log(requestBody)
-
     return new Promise((resolve, reject) => {
         fetch(url, requestBody)
             .then(response => {                  
@@ -121,4 +137,4 @@ function execDelete(path, params, auth) {
     })
 }
 
-export { execGet, execPost, execUpdate, execDelete, login }
+export { execGet, execPost, execPut, execDelete, login }
