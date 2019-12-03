@@ -57,7 +57,7 @@ class Account extends UtilComp {
 
         document.addEventListener('exec-event', (e) => {
             let id = parseInt(e.detail.id)
-            let action = parseInt(e.detail.action)
+            let action = e.detail.action
             action === 'edit'
                 ? this.editCard(id)
                 : this.deleteCard(id)
@@ -79,54 +79,9 @@ class Account extends UtilComp {
                 <img 
                     alt="nueva tarjeta" 
                     src="../assets/img/add.png"
-                    @click=${this.openModal}
+                    @click=${event => this.openModal('genericModal')}
                 />
-                <!--
-                    <button @click=${this.openModal}>showModal</button>-->
-                    <modal-comp 
-                        id="genericModal"
-                        backdropDismiss="true"
-                    >
-                        <h3>Alta Tarjetas</h3>
-                        <div class="row">
-                            <input 
-                                type="text" 
-                                id="cardsNumber" 
-                                name="cardsNumber"
-                                .value=${this.card.cardsNumber}
-                                @change=${e => { this.card.cardsNumber = e.currentTarget.value } }
-                                placeholder="numero de tarjeta">
-                        </div>
-                        <div class="row">
-                            <input 
-                                type="text" 
-                                id="expirationDate" 
-                                name="expirationDate"
-                                .value=${this.card.expirationDate}
-                                @change=${e => { this.card.expirationDate = e.currentTarget.value } }
-                                placeholder="vencimiento">
-                        </div>
-                        <div class="row">
-                            <input 
-                                type="password" 
-                                id="ccv" 
-                                name="ccv"
-                                .value=${this.card.ccv}
-                                @change=${e => { this.card.ccv = e.currentTarget.value } }
-                                placeholder="cvv">
-                        </div>
-                        <button 
-                            class="button-cancel pure-button"
-                            @click=${this.closeModal}>
-                                Close
-                            </button>
-                        <button
-                            class="button-success pure-button" 
-                            @click=${this.createCard}>
-                            Continue
-                        </button>
-                    </modal-comp>
-                
+                ${this.generateModal('genericModal')}
             </div>
             <div class="card inComplete">
                 <h3>Catálogo de servicios</h3>
@@ -152,8 +107,8 @@ class Account extends UtilComp {
         this.shadowRoot.getElementById('ccv').value = ''
     }
 
-    closeModal() {
-        const modal = this.shadowRoot.getElementById('genericModal')
+    closeModal(id) {
+        const modal = this.shadowRoot.getElementById(id)
         modal.close()
     }
 
@@ -172,11 +127,12 @@ class Account extends UtilComp {
     }
 
     editCard(id) {
-        console.log('llamando de edicion', id)
-
+        let card = this.cards[id]
+        console.log('card =>', card)
     }
 
     deleteCard(id) {
+        console.log('card =>', id)
         let urlParameter = this.cards[id].id
         let params = undefined
         let auth = localStorage.getItem('token') || ''
@@ -187,6 +143,55 @@ class Account extends UtilComp {
                 alert('Error en getCards')
             }
         }).catch(error => alert('Ha ocurrido un problema', error) )
+    }
+
+    generateModal(title) {
+        return html`
+            <modal-comp 
+                id="genericModal"
+                backdropDismiss="true"
+            >
+            <h3>${title}</h3>
+            <div class="row">
+                <input 
+                    type="text" 
+                    id="cardsNumber" 
+                    name="cardsNumber"
+                    .value=${this.card.cardsNumber}
+                    @change=${e => { this.card.cardsNumber = e.currentTarget.value } }
+                    placeholder="numero de tarjeta">
+            </div>
+            <div class="row">
+                <input 
+                    type="text" 
+                    id="expirationDate" 
+                    name="expirationDate"
+                    .value=${this.card.expirationDate}
+                    @change=${e => { this.card.expirationDate = e.currentTarget.value } }
+                    placeholder="vencimiento">
+            </div>
+            <div class="row">
+                <input 
+                    type="password" 
+                    id="ccv" 
+                    name="ccv"
+                    .value=${this.card.ccv}
+                    @change=${e => { this.card.ccv = e.currentTarget.value } }
+                    placeholder="cvv">
+                </div>
+                <br/>
+                <button 
+                class="button-cancel pure-button"
+                @click=${event => this.closeModal('genericModal')}>
+                    Cancelar
+                </button>
+                <button
+                    class="button-success pure-button" 
+                    @click=${this.createCard}>
+                        Guardar
+                </button>
+            </modal-comp>
+        `
     }
 
     getCards() {
@@ -217,30 +222,15 @@ class Account extends UtilComp {
             { id: 3, name: 'Liverpool', img:'liverpool' },
             { id: 4, name: 'Amex', img:'amex' }
         ]
-        /*
-        let params = undefined
-        let auth = localStorage.getItem('token') || ''
-        this.cardServices.getAllCards(params, auth).then((response) => {
-            if(response) {
-                let cards = []
-                response.data.map((tarjeta) => {
-                    let newObject = { 
-                        number: tarjeta.cardsNumber, 
-                        expirationDate: tarjeta.expirationDate 
-                    }
-                    cards.push(newObject)
-                })
-                this.cards = cards
-            } else {
-                alert('Error en getCards')
-            }
-        }).catch(error => alert('Ha ocurrido un problema', error) )
-        */
     }
 
-    openModal() {
-        const modal = this.shadowRoot.getElementById('genericModal')
+    openModal(id) {
+        const modal = this.shadowRoot.getElementById(id)
         modal.open()
+    }
+
+    saveEditCard() {
+        console.log('enviando edicion...')
     }
 
 }
