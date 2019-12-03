@@ -46,6 +46,7 @@ class DomiTable extends UtilComp {
         this.actionsDomis = [
             { id: 1, name: 'edita', action: 'edit' },
             { id: 2, name: 'elimina', action: 'delete' }
+            
         ]
         this.domis = []
         this.getDomis()
@@ -82,16 +83,20 @@ class DomiTable extends UtilComp {
             if(response) {
                 let domis = []
                 response.data.map((domi) => {
-                    /*let newObject = { 
-                        id: tarjeta._id,
-                        number: tarjeta.cardsNumber, 
-                        expirationDate: tarjeta.expirationDate 
-                    }*/
-                    domis.push(domi)
+                    let newObject = { 
+                        idCard: domi.idCard,
+                        idAgreement: domi.idAgreement,
+                        alias: domi.alias,
+                        description: domi.description,
+                        reference: domi.reference,
+                        paymentDate: domi.paymentDate,
+                        status: domi.status,
+                    }
+                    domis.push(newObject)
                 })
                 this.domis = domis
             } else {
-                alert('Error en getCards')
+                alert('Error en getDomis')
             }
         }).catch(error => alert('Ha ocurrido un problema', error) )
     }

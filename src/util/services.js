@@ -20,7 +20,7 @@ async function execGet(path, params, auth) {
     }
 
     let request = await fetch(url, requestBody)
-    if (request.status === 200) {
+    if (request.status === 200 || request.status === 201) {
         return request.json()
     } else {
         console.log('error del servicio')

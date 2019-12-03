@@ -8,7 +8,7 @@ export default class DomisServices {
     }
     
     getAllDomis(params, auth) {
-        return callService.execGet(`${this.pathService}/`, params)
+        return callService.execGet(`${this.pathService}/`, params, auth)
     }
 
     createDomi(params, domi, auth) {
